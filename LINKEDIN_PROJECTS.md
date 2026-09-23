@@ -4,7 +4,7 @@
 Global Project & Program Lead and Product Owner | Agentic AI delivery & enablement in regulatory life sciences | PhD Physics
 
 **Suggested About opener (first lines):**
-I am a Global Project & Program Lead and Product Owner focused on agentic AI delivery in regulatory life sciences and R&D. Over the last months I have built and deployed production agentic workflows that turn hours or months of manual work into minutes of extraction plus human QC — systems colleagues use every day, and that spread team-to-team by referral.
+I am a Global Project & Program Lead and Product Owner in life sciences. At Bayer I have deployed two production AI agents into regulatory work, both with a person reviewing the output before it is used. One drafts EPA use-summary tables from pesticide labels and cut that manual work by about 60–70% (88% field-level accuracy). The other reads safety data sheets and drafts the toxicology and ecotoxicology sections of country registration workbooks. Around that sits the global label-data platform and AgriGuide, the industry digital-label programme.
 
 ---
 
@@ -37,15 +37,15 @@ Skills: Agentic AI · Production delivery · LLM extraction · Human-in-the-loop
 **Project name:** APRS Digitalisation
 
 **Description:**
-Prototype that reads MSDS (safety data sheet) PDFs and pre-fills toxicology/ecotoxicology fields in country-specific APRS Excel workbooks — so regulatory experts review instead of transcribe.
+Production agent that reads MSDS (safety data sheet) PDFs and drafts toxicology and ecotoxicology in country-specific APRS Excel workbooks. Experts review before the scores are used. That portion is about 70% of the work per active ingredient. Same human-review pattern as the use-summary extractor. Do not reuse the 88% or 60–70% figures here; those belong to the label extractor.
 
 Problem: filling APRS portfolios is manual classification + country schema lookup; even partial automation of tox/ecotox is expected to cover ~70% of the work per active ingredient.
 
 Solution: staged pipeline (extract → apply country schema living in the workbook → write back in-place, preserving live Score/Overall APRS formulas). Same extract → human-review pattern as Use Summary Table, adapted for multi-sheet .xlsx/.xlsm templates and a ~63-ingredient portfolio.
 
-Status: end-to-end prototype verified on real samples; Cloudflare pilot path in progress before production governance (auth, kill switch, budgets).
+Status: deployed. Experts review the draft before scores are used.
 
-Skills: Document AI · Excel automation · Regulatory workflows · Prototype → pilot · Human-in-the-loop
+Skills: Document AI · Excel automation · Regulatory workflows · Human-in-the-loop · Production delivery
 
 **Media / links:** https://github.com/karansingh2427/APRS_digitalisation · Portfolio: https://karandeepsingh.vercel.app/projects/aprs-digitalisation
 

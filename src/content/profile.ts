@@ -14,7 +14,7 @@ export const profile = {
   karunaEmail: "karan@karuna-space.com",
   about: [
     "I work at Bayer in Monheim, as Global Project & Program Lead and Product Owner. The job is regulatory digital transformation in life sciences: getting label and registration data off paper, and putting AI into the workflows the department actually runs. I have been at Bayer since 2018, including Pharma R&D IT in Leverkusen before this role.",
-    "For EPA use-summary tables, analysts were spending 45–90 minutes on every pesticide label, copying crop and rate data into a fixed schema. The system now in production drafts that table from the PDF. A reviewer still signs it off, in about half an hour, and manual work on the step is down by about 60–70%. The same approach is going into country registration portfolios, where toxicology and ecotoxicology are most of the work per active ingredient.",
+    "For EPA use-summary tables, analysts were spending 45–90 minutes on every pesticide label, copying crop and rate data into a fixed schema. The system now in production drafts that table from the PDF. A reviewer still signs it off, in about half an hour, and manual work on the step is down by about 60–70%. A second system is in production for country registration portfolios. It reads a safety data sheet and drafts the toxicology and ecotoxicology sections, which are most of the work per active ingredient. A reviewer still signs that off.",
     "The scale around it is the label-data platform: 27 countries, more than 100 labels a quarter, a bit over €500k a year, vendor contracts over €250k. AgriGuide is the industry programme, live at agriguide.eu with BASF, Syngenta and Corteva. Structured authoring cut label-authoring effort by about 40–50%. Bayer is working toward a digitised EU portfolio by 2028.",
     "Before Bayer I did a PhD in physics at Cologne and Jülich, on nanoparticles and red blood cells. Outside work I teach yoga, meditation and breathwork at Karuṇā Space.",
   ],
@@ -125,7 +125,7 @@ export const profile = {
       role: "Global Project & Program Lead and Product Owner, label data and AI tools",
       bullets: [
         "Product owner for the label-data platform used in 27 countries. About €500k a year, vendor contracts over €250k, and a backlog aimed at more than 100 labels a quarter.",
-        "Deploying AI systems into life sciences regulatory workflows, so the department spends less time transcribing labels and registration files and more time on the review the submission still needs.",
+        "Two production AI systems in life sciences regulatory workflows, both with a person checking the output. One drafts EPA use-summary tables. The other drafts toxicology and ecotoxicology in country registration workbooks from safety data sheets.",
         "The use-summary system is in production: 149 pages to 155 rows, 28 columns, 88% field-level accuracy against an expert table, source text kept on every cell, with a kill switch and a spend cap.",
         "On AgriGuide I worked with Bayer, BASF, Syngenta and Corteva on the tech and reference-data streams, and on lining up IT, Marketing and Product Supply across Bayer's countries. It is live at agriguide.eu.",
       ],

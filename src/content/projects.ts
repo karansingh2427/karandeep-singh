@@ -101,7 +101,7 @@ export const projects: Project[] = [
     tagline:
       "Reads a safety data sheet and fills the toxicology sections of country registration workbooks.",
     category: "AI",
-    status: "Prototype checked on real files · pilot app in progress",
+    status: "In production · expert review before the scores are used",
     problem:
       "Country APRS portfolios (Assessment of Regulatory Success) live in multi-sheet Excel workbooks. Experts read an MSDS, map the hazard lines, then apply that country's scoring rules. It is slow, it is the same job for every ingredient, and it holds up decisions on which active ingredients are worth registering.",
     value:
@@ -109,7 +109,7 @@ export const projects: Project[] = [
     solution:
       "Pull the classifications out of the MSDS, apply the schema sheet that already lives in the country file, and write back into the existing template without breaking the Score and Overall APRS formulas. Same idea as the use-summary table: a draft, then a person.",
     deployment:
-      "A Python prototype, checked on real samples. A Cloudflare pilot is in progress. Login, kill switch and cost controls wait until the extraction is good enough to put in front of the department.",
+      "Deployed for country registration workbooks. The draft is written back into the existing Excel file. An expert reviews it before the scores are used.",
     metrics: [
       { label: "Work covered (tox/ecotox)", value: "~70%" },
       { label: "Portfolio target", value: "~63 ingredients" },
