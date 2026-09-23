@@ -9,7 +9,7 @@ export function About() {
             About
           </p>
           <h2 className="mt-4 font-display text-3xl tracking-tight text-ink md:text-4xl">
-            Agentic AI delivery in regulatory life sciences
+            Regulatory work in life sciences
           </h2>
         </div>
         <div className="space-y-5 text-base leading-relaxed text-ink-soft md:text-lg">
@@ -17,7 +17,8 @@ export function About() {
             <p key={para}>{para}</p>
           ))}
           <p className="pt-2 text-sm text-ink-soft/80">
-            Open to: {profile.openTo.join(" · ")} — {profile.openToSectors}
+            Open to product and programme lead roles in regulatory digital
+            transformation, across life sciences, pharma, medtech and R&amp;D.
           </p>
         </div>
       </div>

@@ -8,7 +8,7 @@ export function Contact() {
           Contact
         </p>
         <h2 className="mt-4 max-w-xl font-display text-3xl tracking-tight text-ink md:text-4xl">
-          Let&apos;s talk about agentic AI delivery in regulated life sciences.
+          Product and programme roles in regulatory digital transformation.
         </h2>
         <div className="mt-12 flex flex-col gap-4 text-base text-ink-soft md:text-lg">
           <a className="prose-link w-fit" href={`mailto:${profile.email}`}>

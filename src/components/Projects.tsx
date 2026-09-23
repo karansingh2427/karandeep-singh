@@ -9,12 +9,12 @@ export function Projects() {
           Projects
         </p>
         <h2 className="mt-4 max-w-2xl font-display text-3xl tracking-tight text-ink md:text-4xl">
-          Agentic systems shipped — and used
+          Regulatory digital transformation
         </h2>
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-soft">
-          Recent work is production agentic AI in R&amp;D and regulatory
-          sciences: extract → QC → adopt — plus platforms and programmes behind
-          the delivery.
+          AI systems deployed in life sciences regulatory workflows, and
+          the label programmes they sit inside. The aim is a faster department,
+          and registration data that no longer lives only in PDFs.
         </p>
         <div className="mt-14">
           {projects.map((project) => (

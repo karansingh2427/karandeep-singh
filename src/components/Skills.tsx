@@ -8,7 +8,7 @@ export function Skills() {
           Skills
         </p>
         <h2 className="mt-4 max-w-2xl font-display text-3xl tracking-tight text-ink md:text-4xl">
-          Agentic delivery — with receipts
+          What I am accountable for
         </h2>
         <ul className="mt-12 space-y-0">
           {profile.featuredSkills.map((skill, i) => (

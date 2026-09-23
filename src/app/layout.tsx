@@ -16,16 +16,16 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: {
     default:
-      "Karandeep Singh — Global Project & Program Lead · Agentic AI in Life Sciences",
+      "Karandeep Singh — Life sciences, regulatory digital transformation",
     template: "%s · Karandeep Singh",
   },
   description:
-    "Global Project & Program Lead and Product Owner — agentic AI delivery and enablement in regulatory life sciences. Production workflows, platforms, and project write-ups.",
+    "Global Project & Program Lead at Bayer. AI systems deployed into life sciences regulatory workflows, and the label and registration programmes around them.",
   openGraph: {
     title:
-      "Karandeep Singh — Global Project & Program Lead · Agentic AI in Life Sciences",
+      "Karandeep Singh — Life sciences, regulatory digital transformation",
     description:
-      "Agentic AI systems in production for R&D and regulatory sciences — hours of manual work to minutes of extraction plus QC.",
+      "AI systems in life sciences regulatory work, plus the label-data platform and AgriGuide.",
     type: "website",
     locale: "en_GB",
   },

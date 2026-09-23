@@ -25,17 +25,17 @@ export const projects: Project[] = [
     slug: "use-summary-table",
     title: "Use Summary Table Extractor",
     tagline:
-      "Agentic AI that turns pesticide label PDFs into EPA-ready use-summary tables — with human review built in.",
+      "Drafts the EPA use-summary table from a pesticide label. A reviewer still signs it off before it goes anywhere.",
     category: "AI",
-    status: "In production · Cloudflare Pages + Worker · used by colleagues",
+    status: "In production · used on regulatory submissions",
     problem:
-      "Preparing the Use Summary Table for EPA submission means reading long pesticide labels by hand. Use information is scattered across narrative sections, rate tables, crop tables and appendices — typically 45–90 minutes per label (and far longer across a portfolio), error-prone and inconsistent across analysts.",
+      "Use-summary tables for EPA submission were filled by reading long labels by hand. Crop, rate and use-site data is scattered through the narrative, the rate tables and the appendices. One label took 45–90 minutes. Across a portfolio, that is weeks of transcription.",
     value:
-      "In production with regulatory colleagues: ~60–70% less manual work. What used to take hours or stretch across weeks of transcription becomes minutes of agentic extraction plus human QC. Teams that finish a run refer the next team — adoption spreads by word of mouth. Output is schema-compliant (28 columns) and ready for EPA submission or regulatory databases.",
+      "This is in production for regulatory submissions. Manual work on the step is down by about 60–70%. The output is a 28-column table, ready for an EPA filing or a regulatory database after review. That review still takes about half an hour, which is the point.",
     solution:
-      "A browser tool with two extraction paths: (1) offline regex/heuristic engine for fast bulk runs, and (2) LLM agent path (extraction → independent QC → remediation) via Cloudflare Functions against an enterprise AI gateway. Every row carries confidence, page references and source text for inline human editing before Excel export.",
+      "A browser tool with two paths. One uses rules and runs offline, for bulk runs. The other sends the label text through the company AI gateway, then a second pass checks the result. Every row keeps a confidence score, the page number and the source sentence, and you can edit the cell before exporting Excel.",
     deployment:
-      "End-to-end production deployment on Cloudflare Pages + Workers (secrets server-side, background job queue, kill switch, rate limits, cost budget, audit trail). Colleagues run the workflow in their day job — not a demo environment.",
+      "Live on Cloudflare Pages and Workers. Secrets stay on the server. There is a job queue, a kill switch, a rate limit, a daily cost cap and an audit trail. It is part of how the department prepares submissions.",
     metrics: [
       { label: "Manual work cut", value: "~60–70%" },
       { label: "Field-level accuracy", value: "88%" },
@@ -99,17 +99,17 @@ export const projects: Project[] = [
     slug: "aprs-digitalisation",
     title: "APRS Digitalisation",
     tagline:
-      "MSDS → pre-filled toxicology/ecotoxicology in country APRS workbooks, so experts review instead of transcribe.",
+      "Reads a safety data sheet and fills the toxicology sections of country registration workbooks.",
     category: "AI",
-    status: "Prototype verified end-to-end · pilot app in progress",
+    status: "Prototype checked on real files · pilot app in progress",
     problem:
-      "Country APRS (Assessment of Regulatory Success) portfolios live in multi-sheet Excel workbooks. Experts manually read MSDS and other sources, map hazard classifications, then look up country-specific interpretations and scores — slow, repetitive, and a bottleneck for prioritising which active ingredients have a higher chance of registration.",
+      "Country APRS portfolios (Assessment of Regulatory Success) live in multi-sheet Excel workbooks. Experts read an MSDS, map the hazard lines, then apply that country's scoring rules. It is slow, it is the same job for every ingredient, and it holds up decisions on which active ingredients are worth registering.",
     value:
-      "Even partial automation of toxicology + ecotoxicology is expected to cover roughly 70% of the work per active ingredient. Faster, more reliable workbook population gives regulatory managers a clearer view for resourcing and prioritisation — using the workbook's own Overall APRS formulas rather than reinventing scoring.",
+      "Toxicology and ecotoxicology look like about 70% of the work per active ingredient. If those cells are pre-filled, the expert reviews instead of typing, and regulatory managers get a clearer view for resourcing. Scoring stays in the workbook's own formulas.",
     solution:
-      "A staged pipeline: extract classifications from MSDS PDFs, apply country schema mappings that live in the workbook itself, write back into the existing multi-sheet template (preserving live Score/Overall APRS formulas). Sibling design to Use Summary Table (extract → QC → human review), adapted for country-specific schemas and in-place .xlsx/.xlsm editing.",
+      "Pull the classifications out of the MSDS, apply the schema sheet that already lives in the country file, and write back into the existing template without breaking the Score and Overall APRS formulas. Same idea as the use-summary table: a draft, then a person.",
     deployment:
-      "Local Python prototype first (proven on real samples). Cloudflare Pages pilot app evolving toward a global-workbook-first flow (classifications into a shared portfolio, then country copies) before production concerns (Entra M2M, kill switch, budgets) mirror the Use Summary Table governance pattern.",
+      "A Python prototype, checked on real samples. A Cloudflare pilot is in progress. Login, kill switch and cost controls wait until the extraction is good enough to put in front of the department.",
     metrics: [
       { label: "Work covered (tox/ecotox)", value: "~70%" },
       { label: "Portfolio target", value: "~63 ingredients" },
@@ -172,17 +172,17 @@ export const projects: Project[] = [
     slug: "global-label-data-platform",
     title: "Global Label-Data Platform",
     tagline:
-      "Product ownership for regulated label data at scale — vision, roadmap, backlog, budget and partners.",
+      "Product ownership for the global label-data platform: what gets built, in what order, and with whose budget.",
     category: "Platform",
-    status: "In production · Bayer Crop Science",
+    status: "In production · Bayer",
     problem:
-      "Product labels across markets need consistent, data-centred authoring and global coordination. Without a shared platform, teams stay stuck in document-centric creation with high effort and weak reuse.",
+      "Labels were still being written as documents, country by country. Reuse was poor, and there was no single backlog for what the department needed next.",
     value:
-      "A prioritised global backlog delivering 100+ product labels per quarter under a €500k annual budget and €250k+ vendor contracts — with executive-ready governance and measurable adoption/data-quality KPIs.",
+      "More than 100 product labels a quarter, on about €500k a year, with vendor contracts over €250k. Steering updates, and measures for whether people actually use the data.",
     solution:
-      "Product Owner practice: translate business, user and regulatory needs into vision, roadmap, acceptance criteria and backlog; steer external AI/data/SaaS partners; align Regulatory, IT, Marketing and industry stakeholders.",
+      "I own the roadmap and the backlog. Business, user and regulatory needs become acceptance criteria. I also manage the external data and software partners, and keep Regulatory, IT and Marketing on the same plan.",
     deployment:
-      "Enterprise SaaS / platform delivery with Steering Committee updates, vendor management and operational adoption (training, data ownership, workflow measures).",
+      "The live platform. Steering committee, vendor management, training, and the arguments about who owns the data.",
     metrics: [
       { label: "Labels / quarter", value: "100+" },
       { label: "Annual budget", value: "€500k" },
@@ -203,17 +203,17 @@ export const projects: Project[] = [
     slug: "agriguide-digitisation",
     title: "AgriGuide Label Digitisation",
     tagline:
-      "CropLife Europe digital-label platform — live online, with labels from many countries and companies, on track for the EU 2028 portfolio digitisation deadline.",
+      "A shared digital-label product for the industry, already online, aimed at the EU 2028 deadline.",
     category: "Programme",
-    status: "Live · agriguide.eu · EU 2028 roadmap",
+    status: "Live · agriguide.eu · EU 2028",
     problem:
-      "Plant protection product (PPP) labels are complex, paper-heavy and hard for farmers to apply in the field. EU expectations push the industry toward machine-readable digital labels across all markets — which only works if competitors and countries align on one shared product, not 27 siloed builds.",
+      "Product labels are dense paper documents, hard to apply in the field. The EU wants them machine-readable in every market. That only works if competitors and countries use one product, instead of 27 separate builds.",
     value:
-      "AgriGuide is already online: farmers get instant, interoperable, up-to-date digital label instructions (scan → field-relevant conditions of use → compliance guidance). Internally, data-centred authoring cut label-authoring effort by ~40–50% and overall workflow effort by ~50%. Public footprint today includes 1,500+ labels published and participation across most of the EU, with the programme aimed at all 27 Member States.",
+      "AgriGuide is online. A farmer can scan a label and get the conditions of use that apply in the field. Inside Bayer, writing labels from structured data cut authoring effort by about 40–50%, and overall workflow effort by about 50%. More than 1,500 labels are published, across most of the EU, with all 27 countries in scope.",
     solution:
-      "I helped deliver AgriGuide as a cross-industry CropLife Europe initiative — aligning Bayer with peer companies (BASF, Syngenta, Corteva and other collaborators) on shared delivery. Heavily involved in the tech work stream and the reference-data work stream; coordinated Bayer’s internal rollout across 27 countries; and brought IT, Marketing, Product Supply and related functions onto one delivery plan so the product shipped on time.",
+      "I worked on this as a CropLife Europe programme, with Bayer, BASF, Syngenta, Corteva and others on the same delivery. My part was the tech stream, the reference data, Bayer's rollout across 27 countries, and getting IT, Marketing and Product Supply onto one plan.",
     deployment:
-      "Live at agriguide.eu (CropLife Europe). Pilots ran in Germany, Italy and Romania; digital labels from many companies and countries are already published. Expansion continues toward full EU coverage, with Bayer on track to digitise its EU product portfolio by the 2028 deadline.",
+      "Live at agriguide.eu. Pilots started in Germany, Italy and Romania. Bayer is working toward a digitised EU portfolio by 2028.",
     metrics: [
       { label: "Labels published", value: "1,500+" },
       { label: "EU ambition", value: "27 countries" },
@@ -237,17 +237,17 @@ export const projects: Project[] = [
     slug: "pharma-rd-digital-programme",
     title: "Pharma R&D Digital Programme",
     tagline:
-      "€1M programme from requirements to MVP for research workflows across early development.",
+      "A €1 million digital programme for research groups, from what they asked for to a first release.",
     category: "Programme",
     status: "Delivered · Bayer Pharma R&D IT",
     problem:
-      "Research groups across biology, chemistry and biochemistry needed digital products that fit scientific ambition, technical feasibility and regulatory constraints — serving hundreds of researchers without losing governance.",
+      "Biology, chemistry and biochemistry groups needed software that scientists would actually open, inside the usual IT and regulatory controls. The user base was hundreds of researchers.",
     value:
-      "Delivered a €1M digital programme to MVP under Steering Committee governance, with testing, training and adoption support for 500–1,000 researchers.",
+      "Shipped a first release for somewhere between 500 and 1,000 researchers. A steering committee watched a budget of about €1 million.",
     solution:
-      "Business analysis and project management: scientific requirements → roadmaps, user stories and MVP scope; Agile delivery (Scrum/Kanban) with documentation and feedback loops in a regulated environment.",
+      "I turned lab requests into a roadmap, user stories and a scope we could ship. Delivery was Scrum and Kanban, with testing, training and a feedback loop.",
     deployment:
-      "Enterprise IT delivery with Steering Committee oversight, phased MVP rollout, training and change support.",
+      "Bayer Pharma R&D IT, with steering oversight, a phased rollout, and training.",
     metrics: [
       { label: "Programme value", value: "€1M" },
       { label: "Researchers served", value: "500–1,000" },

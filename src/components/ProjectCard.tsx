@@ -21,7 +21,7 @@ export function ProjectCard({ project }: { project: Project }) {
           href={`/projects/${project.slug}`}
           className="text-sm font-medium text-sage-deep transition hover:text-copper"
         >
-          Full write-up →
+          Read more
         </Link>
       </div>
       <p className="mt-4 max-w-3xl text-base leading-relaxed text-ink-soft">

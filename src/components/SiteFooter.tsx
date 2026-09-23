@@ -6,7 +6,7 @@ export function SiteFooter() {
       <div className="shell flex flex-col gap-4 text-sm text-ink-soft md:flex-row md:items-center md:justify-between">
         <p className="font-display text-ink">{profile.brand}</p>
         <p>
-          Product · AI · regulated delivery ·{" "}
+          Life sciences · regulatory digital transformation ·{" "}
           <a
             href={profile.karuna}
             className="prose-link"

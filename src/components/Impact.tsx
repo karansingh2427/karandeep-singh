@@ -8,7 +8,7 @@ export function Impact() {
           Selected impact
         </p>
         <h2 className="mt-4 max-w-2xl font-display text-3xl tracking-tight text-ink md:text-4xl">
-          Outcomes colleagues feel in production
+          What changes for the department
         </h2>
         <ul className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {profile.impact.map((item) => (

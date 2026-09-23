@@ -4,7 +4,7 @@ export const profile = {
   brand: "Karandeep Singh",
   photo: "/profile.jpg",
   headline:
-    "Global Project & Program Lead and Product Owner | Agentic AI delivery & enablement in regulatory life sciences | PhD Physics",
+    "At Bayer I deploy AI into regulatory work in life sciences, and I lead the digital transformation that work sits in.",
   location: "Germany · open to relocation (on-site or hybrid)",
   email: "karandeep.singh2427@gmail.com",
   phone: "+49 151 54094870",
@@ -13,10 +13,10 @@ export const profile = {
   karuna: "https://www.karuna-space.com/",
   karunaEmail: "karan@karuna-space.com",
   about: [
-    "I am a Global Project & Program Lead and Product Owner who builds and ships agentic AI systems in regulated life sciences — R&D, regulatory sciences and related workflows — so colleagues move from hours or months of manual work to minutes of extraction plus human QC.",
-    "Over the last months my focus has been end-to-end agentic AI delivery: design the workflow, put it in production, and stay with the users until it sticks. Systems I have deployed are in daily use; once one team finishes a run, they pull in the next team — demand spreads by referral, and new use cases keep landing on my desk.",
-    "That sits on eight-plus years at Bayer AG across Pharma R&D and Crop Science: global label-data platform ownership, AgriGuide digitisation with industry peers, and now agentic AI enablement and transformation for regulatory and R&D colleagues who need results this week, not a slide deck.",
-    "Outside work I practice and teach yoga, meditation, breathwork and coaching through Karuṇā Space — presence and compassion as the other half of how I lead.",
+    "I work at Bayer in Monheim, as Global Project & Program Lead and Product Owner. The job is regulatory digital transformation in life sciences: getting label and registration data off paper, and putting AI into the workflows the department actually runs. I have been at Bayer since 2018, including Pharma R&D IT in Leverkusen before this role.",
+    "For EPA use-summary tables, analysts were spending 45–90 minutes on every pesticide label, copying crop and rate data into a fixed schema. The system now in production drafts that table from the PDF. A reviewer still signs it off, in about half an hour, and manual work on the step is down by about 60–70%. The same approach is going into country registration portfolios, where toxicology and ecotoxicology are most of the work per active ingredient.",
+    "The scale around it is the label-data platform: 27 countries, more than 100 labels a quarter, a bit over €500k a year, vendor contracts over €250k. AgriGuide is the industry programme, live at agriguide.eu with BASF, Syngenta and Corteva. Structured authoring cut label-authoring effort by about 40–50%. Bayer is working toward a digitised EU portfolio by 2028.",
+    "Before Bayer I did a PhD in physics at Cologne and Jülich, on nanoparticles and red blood cells. Outside work I teach yoga, meditation and breathwork at Karuṇā Space.",
   ],
   openTo: [
     "Global Project / Program Lead",
@@ -25,96 +25,96 @@ export const profile = {
     "Digital Transformation Manager",
   ],
   openToSectors:
-    "Regulatory sciences, R&D, Pharma, MedTech and Crop Science",
+    "Life sciences, regulatory sciences, R&D, pharma and medtech",
   featuredSkills: [
     {
-      name: "Agentic AI Delivery",
+      name: "AI in the department",
       proof:
-        "Production agentic workflows in regulatory sciences — extract → QC → adopt; hours/months of manual work → minutes + human review",
+        "Systems deployed into life sciences regulatory workflows, so submissions and label data move faster without dropping the human check.",
     },
     {
-      name: "AI Enablement & Transformation",
+      name: "Digital transformation",
       proof:
-        "Organic adoption by referral across teams; rapid new use-case delivery; colleagues using systems in production",
+        "The point is the department's cycle time: less transcription across the portfolio, and regulatory information that can be reused instead of retyped.",
     },
     {
-      name: "Regulated Life Sciences",
+      name: "Regulated documents",
       proof:
-        "Global label-data platform across 27 countries + production extraction on regulated documents",
+        "Pesticide labels, country registration files, and the platform those labels sit on. The rules are fussy, and the fussy parts are the job.",
     },
     {
-      name: "Program & Product Leadership",
+      name: "Running the work",
       proof:
-        "Global Project & Program Lead and Product Owner — vision, roadmap, backlog; €500k+ budgets; AgriGuide consortium",
+        "Roadmap, backlog, budget, vendors, steering meetings. The unglamorous half, and the half that keeps a tool alive after the demo.",
     },
     {
-      name: "AI Governance",
+      name: "Safe enough to run",
       proof:
-        "Kill switch, provenance, HITL validation, cost controls — trusted AI colleagues will actually run",
+        "A kill switch, a daily spend cap, and a note of where each value came from. If I cannot point at the source sentence, the cell does not go out.",
     },
   ],
   capabilities: [
     {
-      title: "Agentic AI delivery",
+      title: "AI systems",
       items: [
-        "Production agent workflows",
-        "Extraction → QC → remediation",
-        "Human-in-the-loop by design",
-        "Days-to-working-system delivery",
+        "Production extraction for regulatory files",
+        "PDF and Excel, written back into the templates teams already use",
+        "Human review before anything is submitted",
+        "Kill switch, spend cap, source on every cell",
       ],
     },
     {
-      title: "Enablement & transformation",
+      title: "Department rollout",
       items: [
-        "From pilot to daily use",
-        "Word-of-mouth team adoption",
-        "New use-case discovery",
-        "Training colleagues on the loop",
+        "Fitted to the existing regulatory process",
+        "Training for the people who own the submission",
+        "Measured on cycle time, not on a demo",
+        "Same pattern reused across workflows, not one-off builds",
       ],
     },
     {
-      title: "Program & product leadership",
+      title: "Programme",
       items: [
-        "Global Project & Program Lead",
-        "Product vision & roadmaps",
-        "Budget & vendor ownership",
-        "Steering Committee governance",
+        "Product owner for the label platform",
+        "Backlog and acceptance criteria",
+        "Budget and vendor contracts",
+        "Steering updates that say what slipped",
       ],
     },
     {
-      title: "Tools & languages",
+      title: "Tools and languages",
       items: [
-        "Cursor · Claude · Copilot agents",
-        "Cloudflare · Jira · Confluence",
-        "English & German (full professional)",
-        "Hindi & Punjabi (native)",
+        "Cursor, Claude, Copilot",
+        "Cloudflare, Jira, Confluence",
+        "English and German, full professional",
+        "Hindi and Punjabi",
       ],
     },
   ],
   impact: [
     {
-      metric: "Production",
-      label: "agentic AI in use",
+      metric: "In production",
+      label: "across regulatory work",
       detail:
-        "Deployed end-to-end agentic workflows in regulatory sciences — colleagues run them daily; minutes of extraction + QC instead of hours or months of manual work",
+        "AI extraction is deployed inside Bayer life sciences regulatory work, on the submissions and registration files the department is responsible for.",
     },
     {
       metric: "~60–70%",
       label: "less manual work",
       detail:
-        "Agentic extraction — 149 pages → 155 structured rows; 88% field-level accuracy; provenance for 382 derived values; demand spreads team-to-team by referral",
+        "Use-summary tables: 149 pages to 155 rows, 88% field-level accuracy, review still required. That step used to take 45–90 minutes per label, across the portfolio.",
     },
     {
-      metric: "EU 2028",
-      label: "AgriGuide on track",
+      metric: "1,500+",
+      label: "labels on AgriGuide",
       detail:
-        "Live digital-label platform (agriguide.eu) — tech & reference-data work streams, consortium with BASF, Syngenta, Corteva; 1,500+ labels published",
+        "Already published on agriguide.eu, with BASF, Syngenta, Corteva and others. Bayer is working toward a digitised EU portfolio by 2028.",
     },
     {
       metric: "€500k+",
-      label: "annual platform budget",
+      label: "a year on the platform",
       detail:
-        "Global Project & Program Lead and Product Owner for label-data platform across 27 countries — 100+ labels/quarter, €250k+ vendor contracts",
+        "Label data across 27 countries. More than 100 labels a quarter, and vendor contracts over €250k.",
     },
   ],
   experience: [
@@ -122,12 +122,12 @@ export const profile = {
       org: "Bayer AG",
       place: "Monheim am Rhein, Germany",
       period: "08/2021 – Present",
-      role: "Global Project & Program Lead and Product Owner — Label-Data Platform & Agentic AI Workflows",
+      role: "Global Project & Program Lead and Product Owner, label data and AI tools",
       bullets: [
-        "Global Project & Program Lead and Product Owner for a digital platform used across 27 countries (€500k+ annual budget; €250k+ vendor spend) — vision, roadmap, backlog and adoption for regulatory-information and structured-data workflows.",
-        "Recent focus: building and deploying agentic AI systems and workflows in R&D and regulatory sciences — production systems colleagues use every day, turning hours/months of manual work into minutes of extraction plus human QC; new use cases arrive by referral after each successful delivery.",
-        "Shipped an agentic regulated-document extraction application end-to-end (149 pages → 155 structured rows, 28-column schema, 88% field-level accuracy, HITL + provenance) with kill switch and governance so teams trust the output.",
-        "Led AgriGuide digitisation with Bayer, BASF, Syngenta and Corteva — tech and reference-data work streams, 27-country coordination with IT, Marketing and Product Supply; live at agriguide.eu; on track for EU 2028 portfolio digitisation.",
+        "Product owner for the label-data platform used in 27 countries. About €500k a year, vendor contracts over €250k, and a backlog aimed at more than 100 labels a quarter.",
+        "Deploying AI systems into life sciences regulatory workflows, so the department spends less time transcribing labels and registration files and more time on the review the submission still needs.",
+        "The use-summary system is in production: 149 pages to 155 rows, 28 columns, 88% field-level accuracy against an expert table, source text kept on every cell, with a kill switch and a spend cap.",
+        "On AgriGuide I worked with Bayer, BASF, Syngenta and Corteva on the tech and reference-data streams, and on lining up IT, Marketing and Product Supply across Bayer's countries. It is live at agriguide.eu.",
       ],
     },
     {
@@ -136,9 +136,9 @@ export const profile = {
       period: "06/2018 – 07/2021",
       role: "Project & Product Manager, Pharma R&D IT",
       bullets: [
-        "Managed a €1M+ Pharma R&D digital programme from requirements through MVP rollout under Steering Committee governance.",
-        "Translated scientific and business requirements into roadmaps, user stories and MVP scope; led Agile delivery (Scrum/Kanban) with testing, training and change management.",
-        "Primary interface between scientific stakeholders, business teams and technology delivery partners.",
+        "Ran a digital programme of about €1 million, from what the scientists asked for through to a first release. A steering committee watched the money.",
+        "Turned lab requests into a roadmap, user stories and a scope we could actually ship. Delivery was Scrum and Kanban, plus testing and training.",
+        "I was the person in the middle: scientists, the business, and the teams building the software.",
       ],
     },
     {
@@ -147,8 +147,8 @@ export const profile = {
       period: "08/2014 – 05/2018",
       role: "International Helmholtz Research Fellow (Doctoral Researcher)",
       bullets: [
-        "Led a four-year computational research programme on malaria / red-blood-cell interactions using large-scale molecular simulations.",
-        "Published peer-reviewed research (nanoparticle-decorated erythrocytes) and communicated science publicly (including Science Slam).",
+        "Four years on how nanoparticles sit on red blood cells, using large molecular simulations. The applied question was malaria.",
+        "Published the work, and talked about it in public, including a Science Slam.",
       ],
     },
   ],
@@ -167,7 +167,7 @@ export const profile = {
   training: [
     "Generative AI for Business Leaders (2025)",
     "AI For Everyone · Data Science in Real Life",
-    "Hands-on agentic AI workflow implementation",
+    "AI workflows, learned by shipping them at Bayer",
     "Mindfulness Life Coach",
     "German B1",
   ],
@@ -183,7 +183,7 @@ export const profile = {
     title: "Karuṇā Space",
     tagline: "Breathe. Awaken. Belong.",
     blurb:
-      "My sacred offering beyond product work — a compassionate sanctuary for presence, connection and transformation. Rooted in love and care, Karuṇā Space is a gentle homecoming: a place to rest in your own wisdom and be held by community.",
+      "Separate from Bayer. I teach yoga, meditation, breathwork and coaching, and I run the sessions myself. If you want the longer version, it is on karuna-space.com.",
     offerings: [
       "Yoga",
       "Meditation",
