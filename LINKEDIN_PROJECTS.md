@@ -85,22 +85,7 @@ Skills: Product ownership · Roadmapping · Vendor management · Regulated data 
 
 ---
 
-## 5. Agentic for Good
-
-**Project name:** Agentic for Good
-
-**Description:**
-Personal NGO / research initiative exploring how agentic AI can help solve already-funded world problems — starting with a grant-research agent that matches problem themes to open EU/US calls, plus a partner briefing site.
-
-Built TypeScript CLI matching logic over curated grants/problems, an Agency Lens PoC (inspect / challenge / override), and a password-protected Next.js partner site. Cites Daneshlab (https://daneshlab.ai/) as the working education-platform asset for funding applications.
-
-Skills: Agentic AI · Grant strategy · TypeScript · Next.js · Social impact
-
-**Media / links:** https://github.com/karansingh2427/agentic-for-good · Portfolio: https://karandeepsingh.vercel.app/projects/agentic-for-good
-
----
-
-## 6. Pharma R&D Digital Programme (€1M+)
+## 5. Pharma R&D Digital Programme (€1M+)
 
 **Project name:** Pharma R&D Digital Programme
 
