@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+:root {
+  /* Olive & sandstone — warm, earthy, high contrast */
+  --ink: #2a241c;
+  --ink-soft: #3f3830;
+  --mist: #e8e2d6;
+  --fog: #f3efe7;
+  --paper: #f2efe8;
+  --sage: #5c6b4a;
+  --sage-deep: #3f4a33;
+  --copper: #a67c52;
+  --line: rgba(42, 36, 28, 0.14);
+  --sand: #f7f3ea;
+  --sand-muted: rgba(247, 243, 234, 0.9);
+  --background: var(--paper);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-mist: var(--mist);
+  --color-fog: var(--fog);
+  --color-paper: var(--paper);
+  --color-sage: var(--sage);
+  --color-sage-deep: var(--sage-deep);
+  --color-copper: var(--copper);
+  --color-line: var(--line);
+  --color-sand: var(--sand);
+  --color-sand-muted: var(--sand-muted);
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-fraunces);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--paper);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--sage) 35%, white);
+  color: var(--ink);
+}
+
+/* Hero-only wash — never spans mid-page content */
+.hero-wash {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse 90% 70% at 5% 0%, rgba(92, 107, 74, 0.22), transparent 55%),
+    radial-gradient(ellipse 70% 55% at 95% 10%, rgba(166, 124, 82, 0.14), transparent 50%),
+    linear-gradient(180deg, #e9e4d8 0%, var(--paper) 78%);
+}
+
+.hero-wash::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hero-wash > * {
+  position: relative;
+  z-index: 1;
+}
+
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+}
+
+@keyframes draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.accent-line {
+  transform-origin: left;
+  animation: draw 1s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+.drift {
+  animation: drift 7s ease-in-out infinite;
+}
+
+a {
+  color: inherit;
+}
+
+.prose-link {
+  color: var(--sage-deep);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.prose-link:hover {
+  color: var(--copper);
+}
+
+.section-pad {
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+.shell {
+  width: min(1120px, 100%);
+  margin-inline: auto;
+}
+
+/* Solid section bands — no gradient seams through text */
+.section-band {
+  background: var(--paper);
+}
+
+.section-band-alt {
+  background: #ebe6db;
+}
+
+.btn-primary {
+  background: var(--sage-deep);
+  color: var(--sand);
+}
+
+.btn-primary:hover {
+  background: var(--ink);
+  color: var(--sand);
+}
+
+.btn-dark {
+  background: var(--ink);
+  color: var(--sand);
+}
+
+.btn-dark:hover {
+  background: var(--sage-deep);
+  color: var(--sand);
+}
