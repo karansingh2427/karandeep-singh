@@ -4,7 +4,11 @@
 Global Project & Program Lead and Product Owner | Agentic AI delivery & enablement in regulatory life sciences | PhD Physics
 
 **Suggested About opener (first lines):**
-I am a Global Project & Program Lead and Product Owner in life sciences. At Bayer I have deployed two production AI agents into regulatory work, both with a person reviewing the output before it is used. One drafts EPA use-summary tables from pesticide labels and cut that manual work by about 60–70% (88% field-level accuracy). The other reads safety data sheets and drafts the toxicology and ecotoxicology sections of country registration workbooks. Around that sits the global label-data platform and AgriGuide, the industry digital-label programme.
+I am a Global Project & Program Lead and Product Owner in life sciences. At Bayer I look after the label-data platform, and I have put two AI tools into the regulatory work itself. Someone still checks the output before it is used. The rest of this profile is AgriGuide and the earlier Pharma R&D programme.
+
+**Experience bullets (Bayer, paste as two separate lines, same voice as the existing role):**
+- Built and deployed an agentic AI application for regulated-document extraction, converting 149 pages into 155 structured rows across a 28-column schema with zero blanks and achieving 88% field-level accuracy against an expert-vetted gold standard. Human review takes about 30 minutes, with approximately 60–70% less manual effort on that step.
+- Delivered a second production application for country APRS registration workbooks, reading safety data sheets and drafting toxicology and ecotoxicology, about 70% of the work per active ingredient, with expert review before the scores are used.
 
 ---
 

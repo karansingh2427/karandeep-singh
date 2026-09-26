@@ -13,6 +13,12 @@ const nextConfig: NextConfig = {
         destination: "/projects/ars-automation",
         permanent: true,
       },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "karandeepsingh.vercel.app" }],
+        destination: "https://karandeepsingh.net/:path*",
+        permanent: true,
+      },
     ];
   },
 };
