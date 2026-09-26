@@ -35,7 +35,7 @@ export const projects: Project[] = [
     solution:
       "A browser tool with two paths. One uses rules and runs offline, for bulk runs. The other sends the label text through the company AI gateway, then a second pass checks the result. Every row keeps a confidence score, the page number and the source sentence, and you can edit the cell before exporting Excel.",
     deployment:
-      "Live on Cloudflare Pages and Workers. Secrets stay on the server. There is a job queue, a kill switch, a rate limit, a daily cost cap and an audit trail. It is part of how the department prepares submissions.",
+      "Live on Cloudflare Pages and Workers. Secrets stay on the server. There is a job queue, a kill switch, a rate limit, a daily cost cap, an audit trail, content-safety flags and drift checks — the Pre-Flight guardrails I apply when shipping agentic tools. It is part of how the department prepares submissions.",
     metrics: [
       { label: "Manual work cut", value: "~60–70%" },
       { label: "Field-level accuracy", value: "88%" },
@@ -91,7 +91,7 @@ export const projects: Project[] = [
       {
         question: "What happens when things don't work as expected",
         answer:
-          "Kill switch disables AI paths in seconds via KV (in-flight requests finish; new ones get a clear 503). Rate limits and a daily cost budget stop runaway spend. Content-safety flags are recorded without blocking (false positives on real labels). Users fall back to regex mode or Copilot agents. Reviewers always see confidence + source text so bad cells are correctable before export — the system fails toward human judgement, not silent wrong tables.",
+          "Kill switch disables AI paths in seconds via KV (in-flight requests finish; new ones get a clear 503). Rate limits and a daily cost budget stop runaway spend. Content-safety / prompt-injection flags are recorded without blocking (false positives on real labels). Drift checks compare recent QC severity against a prior window. Users fall back to regex mode or Copilot agents. Reviewers always see confidence + source text so bad cells are correctable before export — the system fails toward human judgement, not silent wrong tables.",
       },
     ],
   },
@@ -109,7 +109,7 @@ export const projects: Project[] = [
     solution:
       "Pull the classifications out of the MSDS, apply the schema sheet that already lives in the country file, and write back into the existing template without breaking the Score and Overall APRS formulas. Same idea as the use-summary table: a draft, then a person.",
     deployment:
-      "Deployed for country registration workbooks. The draft is written back into the existing Excel file. An expert reviews it before the scores are used.",
+      "Cloudflare Pages pilot for the interactive flow, plus a local Python path. Secrets stay on the server. Same Pre-Flight guardrails as the use-summary tool are live here too: kill switch, rate limit, daily cost cap, metadata audit trail, injection-phrase flags, Agent Card, drift check and CSP. An expert still reviews before scores are used. Full per-user identity (Entra) is the next hardening step.",
     metrics: [
       { label: "Work covered (tox/ecotox)", value: "~70%" },
       { label: "Portfolio target", value: "~63 ingredients" },
@@ -121,7 +121,8 @@ export const projects: Project[] = [
       "PDF / MSDS extraction",
       "Excel write-back (openpyxl)",
       "Country schema sheets",
-      "Cloudflare Pages (pilot)",
+      "Cloudflare Pages + KV",
+      "AI Pre-Flight guardrails",
     ],
     links: [
       {
@@ -134,12 +135,12 @@ export const projects: Project[] = [
       {
         question: "What it is",
         answer:
-          "A prototype that reads an MSDS PDF and pre-fills the toxicology and ecotoxicology portions of Bayer country-specific APRS portfolio workbooks, leaving country experts to review and correct rather than start from a blank sheet.",
+          "A system that reads an MSDS PDF and pre-fills the toxicology and ecotoxicology portions of Bayer country-specific APRS portfolio workbooks, leaving country experts to review and correct rather than start from a blank sheet.",
       },
       {
         question: "How it works",
         answer:
-          "Stage 1 extracts hazard classifications from the MSDS. Stage 2 applies the country workbook's own Schema sheet (classification → interpretation → score). Stage 3 writes values into the ingredient sheet (row 2, matching how the summary dashboard macro reads data), cloning a template sheet when a new active ingredient appears. Experts remain the final authority.",
+          "Stage 1 extracts hazard classifications from the MSDS. Stage 2 applies the country workbook's own Schema sheet (classification → interpretation → score). Stage 3 writes values into the ingredient sheet (row 2, matching how the summary dashboard macro reads data), cloning a template sheet when a new active ingredient appears. Experts remain the final authority; chat can propose edits but never auto-applies them.",
       },
       {
         question: "Why it works",
@@ -154,7 +155,7 @@ export const projects: Project[] = [
       {
         question: "What its limitations are",
         answer:
-          "Prototype scope is tox/ecotox, not the full political/regulatory criteria set. MSDS quality and layout variance still need human correction. Production auth, kill switch and cost controls are intentionally deferred until extraction quality is proven. Dashboard refresh depends on existing macros/SharePoint paths outside this tool.",
+          "Scope is tox/ecotox, not the full political/regulatory criteria set. MSDS quality and layout variance still need human correction. Per-user enterprise identity and Agent Hub registration are not done yet. Dashboard refresh depends on existing macros/SharePoint paths outside this tool.",
       },
       {
         question: "What alternatives exist",
@@ -164,7 +165,80 @@ export const projects: Project[] = [
       {
         question: "What happens when things don't work as expected",
         answer:
-          "Outputs always go to a copy of the workbook, never the golden sample. Mis-mapped classifications are caught in expert review before scores drive prioritisation. Pipeline stages can be re-run independently. Future production mirror of Use Summary Table governance (kill switch, budgets, audit) is planned once the prototype is signed off.",
+          "Outputs always go to a copy of the workbook, never the golden sample. Unmapped classifications stay flagged for expert review rather than guessed. Kill switch, rate limit and daily budget stop runaway AI spend; audit records stay metadata-only (no raw MSDS text). Injection-style phrases are flagged, not blindly obeyed. Drift checks watch rising unmapped rates — correction stays a human decision.",
+      },
+    ],
+  },
+  {
+    slug: "ai-preflight",
+    title: "AI Pre-Flight Checklist",
+    tagline:
+      "A portable checklist for shipping agentic AI — a generic version I built from deploying agents at Bayer.",
+    category: "AI",
+    status: "Personal working standard · used on Use Summary Table & APRS",
+    problem:
+      "When you ship an agent, the same questions keep coming back: can you stop it, who reviews the output, what did it cost, who owns it, and did you check for prompt injection? Without a shared checklist, every project reinvented those answers — or skipped them.",
+    value:
+      "A reusable Pre-Flight board I can run before a pilot or a broader rollout. It turns governance into concrete work (a kill switch in the repo, an audit trail, a named owner) instead of a slide. I have already applied it to the use-summary extractor and the APRS tool.",
+    solution:
+      "I did not create an official corporate standard from scratch. I built a generic, portable version based on building and deploying agents at Bayer — taking what I learned from internal Agentic AI / AI Governance guidance and GenAI learning material, and turning it into a personal checklist with placeholders for whoever the next employer is (risk gate, identity, catalog, help channel).",
+    deployment:
+      "Interactive checklist on this site (progress saved in the browser). Also available as a Claude Code skill so I can run /ai-preflight against a real codebase. Explicitly not Bayer policy — a practitioner synthesis. Reference apps: Use Summary Table and APRS.",
+    metrics: [
+      { label: "Sections", value: "6" },
+      { label: "Checklist items", value: "~30" },
+      { label: "Apps applied", value: "2+" },
+      { label: "Form", value: "Interactive HTML + skill" },
+    ],
+    stack: [
+      "AI governance practice",
+      "HITL · kill switch · audit",
+      "Org-profile placeholders",
+      "Agent Card / sign-off",
+      "Claude Code skill",
+    ],
+    links: [
+      {
+        label: "Open checklist",
+        href: "/ai-preflight/checklist.html",
+      },
+    ],
+    featured: true,
+    depth: [
+      {
+        question: "What it is",
+        answer:
+          "A personal AI Pre-Flight checklist for agentic apps: decide autonomy and scope, ground the agent, test it, wire HITL/monitoring/security/cost controls, document and sign off, and implement golden-standard guardrails (kill switch, rate/budget, drift, audit, cyber).",
+      },
+      {
+        question: "How it works",
+        answer:
+          "For each item, look at the real codebase (done / partial / missing / accepted gap), then implement — no empty ticks. Items that name an org mechanism (risk assessment, managed identity, agent catalog) use a small profile table so the same board still works if the employer changes.",
+      },
+      {
+        question: "Why it works",
+        answer:
+          "It came from shipping, not theory. Use Summary Table and APRS forced concrete patterns. A checklist that only names ideals would not have survived those pilots.",
+      },
+      {
+        question: "Why I built a generic version",
+        answer:
+          "Bayer's internal material is useful inside Bayer. I needed something I could reuse on the next agent — and that would still make sense at another employer. Distilling a portable checklist with [ORG] placeholders was the honest shape.",
+      },
+      {
+        question: "What its limitations are",
+        answer:
+          "Not an official standard of any organisation. Bayer mechanisms appear as examples in the org profile, not as a claim that this checklist is Bayer policy. Training sign-off and Hub registration stay project-specific follow-ups.",
+      },
+      {
+        question: "What alternatives exist",
+        answer:
+          "Ad-hoc per-project notes; waiting for a central platform team; copying a vendor trust framework wholesale. This sits in the middle: opinionated enough to drive engineering, portable enough to reuse.",
+      },
+      {
+        question: "What happens when things don't work as expected",
+        answer:
+          "Gaps are named as accepted limitations (shared pilot secret, placeholder budget numbers) rather than hidden. Detection (drift, flags) triggers human review — the checklist never pretends automated correction replaces ownership.",
       },
     ],
   },

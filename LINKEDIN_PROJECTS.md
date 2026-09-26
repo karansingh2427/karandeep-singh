@@ -22,11 +22,11 @@ Built and deployed a production agentic AI application that extracts Use Summary
 
 Problem: analysts spent 45–90 minutes per label (far longer across a portfolio) copying crop, use-site and rate data from long PDFs into a 28-column schema.
 
-Solution: browser tool with dual paths (offline regex + LLM extraction → independent QC → human review). Deployed end-to-end on Cloudflare Pages + Workers with kill switch, rate limits, cost budget and audit trail.
+Solution: browser tool with dual paths (offline regex + LLM extraction → independent QC → human review). Deployed on Cloudflare Pages + Workers with kill switch, rate limits, cost budget, audit trail, content-safety flags and drift checks.
 
 Impact: ~60–70% less manual work; 88% field-level accuracy; hours/months of transcription → minutes of extraction + QC. Teams that finish a run refer the next team — new use cases keep arriving by word of mouth.
 
-Skills: Agentic AI · Production delivery · LLM extraction · Human-in-the-loop · Regulatory sciences · Enablement
+Skills: Agentic AI · Production delivery · LLM extraction · Human-in-the-loop · Regulatory sciences · AI governance
 
 **Media / links:** GitHub: https://github.com/karansingh2427/use-summary-table · Portfolio: https://karandeepsingh.vercel.app/projects/use-summary-table
 
@@ -43,15 +43,30 @@ Problem: filling APRS portfolios is manual classification + country schema looku
 
 Solution: staged pipeline (extract → apply country schema living in the workbook → write back in-place, preserving live Score/Overall APRS formulas). Same extract → human-review pattern as Use Summary Table, adapted for multi-sheet .xlsx/.xlsm templates and a ~63-ingredient portfolio.
 
-Status: deployed. Experts review the draft before scores are used.
+Status: deployed with the same Pre-Flight guardrails as the use-summary tool (kill switch, rate/budget, audit trail, injection flags). Experts review the draft before scores are used.
 
-Skills: Document AI · Excel automation · Regulatory workflows · Human-in-the-loop · Production delivery
+Skills: Document AI · Excel automation · Regulatory workflows · Human-in-the-loop · AI governance
 
 **Media / links:** https://github.com/karansingh2427/APRS_digitalisation · Portfolio: https://karandeepsingh.vercel.app/projects/aprs-digitalisation
 
 ---
 
-## 3. AgriGuide — EU digital labels (CropLife Europe)
+## 3. AI Pre-Flight Checklist
+
+**Project name:** AI Pre-Flight Checklist
+
+**Description:**
+A portable governance checklist for shipping agentic AI. I did not invent an official corporate standard from scratch — I built a generic version based on building and deploying agents at Bayer, so I can reuse the same board (kill switch, HITL, audit, cost, injection, ownership, sign-off) on the next agent, including outside Bayer.
+
+Form: interactive checklist (~6 sections, ~30 items) plus a Claude Code skill. Already applied to Use Summary Table and APRS.
+
+Skills: AI governance · Agentic AI · HITL · Enablement
+
+**Media / links:** https://karandeepsingh.vercel.app/projects/ai-preflight · Checklist: https://karandeepsingh.vercel.app/ai-preflight/checklist.html
+
+---
+
+## 4. AgriGuide — EU digital labels (CropLife Europe)
 
 **Project name:** AgriGuide Label Digitisation
 
@@ -68,7 +83,7 @@ Skills: Digital transformation · Change management · Cross-company consortia �
 
 ---
 
-## 4. Global Label-Data Platform
+## 5. Global Label-Data Platform
 
 **Project name:** Global Label-Data Platform (Product Ownership)
 
@@ -85,7 +100,7 @@ Skills: Product ownership · Roadmapping · Vendor management · Regulated data 
 
 ---
 
-## 5. Pharma R&D Digital Programme (€1M+)
+## 6. Pharma R&D Digital Programme (€1M+)
 
 **Project name:** Pharma R&D Digital Programme
 
@@ -103,8 +118,9 @@ Skills: Programme management · Business analysis · Agile · Regulated IT · Ch
 ## LinkedIn Featured (optional short pins)
 
 1. **Agentic AI in production** — regulatory workflows from hours/months of manual work to minutes of extraction + QC; teams refer the next use case. https://karandeepsingh.vercel.app/projects/use-summary-table
-2. **AgriGuide is live** — digital PPP labels; tech + reference-data work streams and 27-country coordination toward EU 2028. https://www.agriguide.eu/
-3. **Portfolio** — Global Project & Program Lead and Product Owner · agentic AI delivery in life sciences. https://karandeepsingh.vercel.app/
+2. **AI Pre-Flight** — portable governance checklist distilled from shipping agents at Bayer. https://karandeepsingh.vercel.app/projects/ai-preflight
+3. **AgriGuide is live** — digital PPP labels; tech + reference-data work streams and 27-country coordination toward EU 2028. https://www.agriguide.eu/
+4. **Portfolio** — Global Project & Program Lead and Product Owner · agentic AI delivery in life sciences. https://karandeepsingh.vercel.app/
 
 ---
 
