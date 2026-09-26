@@ -58,11 +58,11 @@ Skills: Document AI · Excel automation · Regulatory workflows · Human-in-the-
 **Description:**
 A portable governance checklist for shipping agentic AI. I did not invent an official corporate standard from scratch — I built a generic version based on building and deploying agents at Bayer, so I can reuse the same board (kill switch, HITL, audit, cost, injection, ownership, sign-off) on the next agent, including outside Bayer.
 
-Form: interactive checklist (~6 sections, ~30 items) plus a Claude Code skill. Already applied to Use Summary Table and APRS.
+Form: private interactive checklist (~6 sections, ~30 items) plus a Claude Code skill — shared on request, not published open on the portfolio. Already applied to Use Summary Table and APRS.
 
 Skills: AI governance · Agentic AI · HITL · Enablement
 
-**Media / links:** https://karandeepsingh.vercel.app/projects/ai-preflight · Checklist: https://karandeepsingh.vercel.app/ai-preflight/checklist.html
+**Media / links:** https://karandeepsingh.vercel.app/projects/ai-preflight · Request access via contact: https://karandeepsingh.vercel.app/#contact
 
 ---
 

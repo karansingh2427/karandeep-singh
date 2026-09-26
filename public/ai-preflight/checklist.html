@@ -1,682 +1,106 @@
-<title>AI Pre-Flight</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
-
-  :root {
-    --bg: #eef1ee;
-    --surface: #ffffff;
-    --surface-2: #e4e9e3;
-    --line: #cad3c8;
-    --ink: #16211d;
-    --ink-soft: #4c5a52;
-    --ink-faint: #7c8a80;
-    --accent: #1f6f6b;
-    --accent-ink: #135450;
-    --accent-soft: #dcebe9;
-    --org-bg: #f4e7cd;
-    --org-ink: #8a5a1f;
-    --good: #2f7a4f;
-    --good-bg: #e1f0e5;
-    --partial: #b3701f;
-    --partial-bg: #f6e9d5;
-    --gap: #a83232;
-    --gap-bg: #f5e0df;
-    --shadow: 0 1px 2px rgba(20, 30, 25, 0.06), 0 6px 16px rgba(20, 30, 25, 0.05);
-    --radius: 10px;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #101613;
-      --surface: #161f1b;
-      --surface-2: #1c2621;
-      --line: #2b3730;
-      --ink: #e8ede8;
-      --ink-soft: #a7b6ac;
-      --ink-faint: #798a7e;
-      --accent: #52b6ae;
-      --accent-ink: #8fd6cf;
-      --accent-soft: #1c2f2c;
-      --org-bg: #3a2c15;
-      --org-ink: #e0b478;
-      --good: #5cb87f;
-      --good-bg: #17281d;
-      --partial: #d9a13f;
-      --partial-bg: #2c2312;
-      --gap: #de6b64;
-      --gap-bg: #2c1917;
-      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 20px rgba(0, 0, 0, 0.35);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>AI Pre-Flight — request access</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+    :root {
+      --bg: #eef1ee;
+      --ink: #16211d;
+      --ink-soft: #4c5a52;
+      --accent: #1f6f6b;
+      --surface: #ffffff;
+      --line: #cad3c8;
     }
-  }
-
-  :root[data-theme="dark"] {
-    --bg: #101613;
-    --surface: #161f1b;
-    --surface-2: #1c2621;
-    --line: #2b3730;
-    --ink: #e8ede8;
-    --ink-soft: #a7b6ac;
-    --ink-faint: #798a7e;
-    --accent: #52b6ae;
-    --accent-ink: #8fd6cf;
-    --accent-soft: #1c2f2c;
-    --org-bg: #3a2c15;
-    --org-ink: #e0b478;
-    --good: #5cb87f;
-    --good-bg: #17281d;
-    --partial: #d9a13f;
-    --partial-bg: #2c2312;
-    --gap: #de6b64;
-    --gap-bg: #2c1917;
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 20px rgba(0, 0, 0, 0.35);
-  }
-
-  * { box-sizing: border-box; }
-
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
-    font-size: 16px;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; animation: none !important; }
-  }
-
-  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
-
-  a { color: var(--accent-ink); text-decoration-thickness: 1.5px; }
-  a:focus-visible, button:focus-visible, input:focus-visible {
-    outline: 2px solid var(--accent); outline-offset: 2px;
-  }
-
-  /* ---------- shell ---------- */
-
-  .topbar {
-    position: sticky; top: 0; z-index: 20;
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid var(--line);
-  }
-  .topbar-inner {
-    max-width: 920px; margin: 0 auto;
-    padding: 10px 24px;
-    display: flex; align-items: center; gap: 18px;
-  }
-  .topbar-mark {
-    font-family: "Archivo", sans-serif; font-weight: 800;
-    font-size: 0.82rem; letter-spacing: 0.06em;
-    color: var(--ink-soft); white-space: nowrap;
-  }
-  .topbar-nav {
-    display: flex; gap: 4px; overflow-x: auto; flex: 1;
-    scrollbar-width: none;
-  }
-  .topbar-nav::-webkit-scrollbar { display: none; }
-  .topbar-nav a {
-    font-family: "IBM Plex Mono"; font-size: 0.76rem; font-weight: 500;
-    color: var(--ink-faint); text-decoration: none;
-    padding: 6px 10px; border-radius: 999px; white-space: nowrap;
-    transition: background 0.15s, color 0.15s;
-  }
-  .topbar-nav a:hover { background: var(--surface-2); color: var(--ink); }
-  .progress-pill {
-    font-family: "IBM Plex Mono"; font-size: 0.78rem;
-    font-variant-numeric: tabular-nums;
-    background: var(--surface); border: 1px solid var(--line);
-    border-radius: 999px; padding: 5px 12px;
-    color: var(--ink-soft); white-space: nowrap;
-  }
-  .progress-pill strong { color: var(--accent-ink); }
-
-  main { max-width: 920px; margin: 0 auto; padding: 0 24px 96px; }
-
-  /* ---------- masthead ---------- */
-
-  .masthead { padding: 56px 0 36px; border-bottom: 1px solid var(--line); }
-  .eyebrow {
-    font-family: "IBM Plex Mono"; font-size: 0.78rem; font-weight: 500;
-    letter-spacing: 0.09em; text-transform: uppercase;
-    color: var(--accent-ink); margin-bottom: 14px;
-  }
-  h1 {
-    font-family: "Archivo", sans-serif; font-weight: 800;
-    font-size: clamp(2.1rem, 5vw, 3rem); line-height: 1.02;
-    letter-spacing: -0.01em; margin: 0 0 14px; text-wrap: balance;
-  }
-  .lede {
-    font-size: 1.08rem; color: var(--ink-soft); max-width: 640px;
-    text-wrap: pretty; margin: 0 0 22px;
-  }
-  .masthead-meta {
-    display: flex; flex-wrap: wrap; gap: 10px 22px;
-    font-size: 0.86rem; color: var(--ink-faint);
-  }
-  .masthead-meta b { color: var(--ink-soft); font-weight: 600; }
-
-  /* ---------- generic section rhythm ---------- */
-
-  section.block { padding: 40px 0; border-bottom: 1px solid var(--line); }
-  section.block:last-of-type { border-bottom: none; }
-
-  .block-head { margin-bottom: 20px; }
-  .block-kicker {
-    font-family: "IBM Plex Mono"; font-size: 0.76rem; font-weight: 500;
-    color: var(--ink-faint); letter-spacing: 0.04em; margin-bottom: 6px;
-  }
-  h2 {
-    font-family: "Archivo", sans-serif; font-weight: 700;
-    font-size: 1.5rem; margin: 0 0 8px; letter-spacing: -0.005em;
-  }
-  .block-desc { color: var(--ink-soft); max-width: 62ch; font-size: 0.98rem; }
-  .block-desc + .block-desc { margin-top: 8px; }
-
-  /* ---------- org profile table ---------- */
-
-  .table-wrap {
-    overflow-x: auto; border: 1px solid var(--line);
-    border-radius: var(--radius); background: var(--surface);
-    box-shadow: var(--shadow);
-  }
-  table { border-collapse: collapse; width: 100%; min-width: 720px; }
-  th, td {
-    text-align: left; padding: 12px 16px; font-size: 0.87rem;
-    border-bottom: 1px solid var(--line); vertical-align: top;
-  }
-  thead th {
-    font-family: "IBM Plex Mono"; font-weight: 500; font-size: 0.72rem;
-    letter-spacing: 0.04em; text-transform: uppercase;
-    color: var(--ink-faint); background: var(--surface-2);
-  }
-  tbody tr:last-child td { border-bottom: none; }
-  tbody tr:hover { background: var(--surface-2); }
-  td.org-name { font-weight: 600; white-space: nowrap; }
-  td.org-current { position: relative; }
-  .current-tag {
-    display: inline-block; margin-left: 8px;
-    font-family: "IBM Plex Mono"; font-size: 0.66rem; font-weight: 500;
-    background: var(--accent-soft); color: var(--accent-ink);
-    padding: 2px 7px; border-radius: 999px; letter-spacing: 0.03em;
-  }
-  td.next-row { color: var(--ink-faint); font-style: italic; }
-
-  .org-note {
-    margin-top: 16px; padding: 14px 16px;
-    background: var(--org-bg); border-radius: var(--radius);
-    font-size: 0.87rem; color: var(--ink);
-  }
-  .org-note b { color: var(--org-ink); }
-
-  /* ---------- process steps ---------- */
-
-  .steps {
-    list-style: none; margin: 0; padding: 0;
-    display: grid; gap: 12px;
-  }
-  .steps li {
-    display: grid; grid-template-columns: 30px 1fr; gap: 14px;
-    background: var(--surface); border: 1px solid var(--line);
-    border-radius: var(--radius); padding: 14px 16px;
-    box-shadow: var(--shadow);
-  }
-  .step-num {
-    font-family: "Archivo", sans-serif; font-weight: 800; font-size: 1rem;
-    color: var(--accent-ink);
-  }
-  .steps p { margin: 0; font-size: 0.92rem; color: var(--ink-soft); }
-  .steps strong { color: var(--ink); }
-
-  /* ---------- checklist sections ---------- */
-
-  .section-head {
-    display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px;
-    flex-wrap: wrap;
-  }
-  .section-num {
-    font-family: "Archivo", sans-serif; font-weight: 800;
-    font-size: 2.1rem; color: var(--accent); line-height: 1;
-  }
-  .section-titles h2 { margin-bottom: 2px; }
-  .section-sub { font-size: 0.86rem; color: var(--ink-faint); }
-  .section-count {
-    margin-left: auto; font-family: "IBM Plex Mono"; font-size: 0.78rem;
-    color: var(--ink-faint); font-variant-numeric: tabular-nums;
-    align-self: center;
-  }
-
-  .items { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 10px; }
-  .item {
-    position: relative;
-    display: grid; grid-template-columns: 22px 1fr; gap: 14px;
-    background: var(--surface); border: 1px solid var(--line);
-    border-radius: var(--radius); padding: 14px 16px 15px;
-    box-shadow: var(--shadow);
-  }
-  .item input[type="checkbox"] {
-    width: 19px; height: 19px; margin-top: 2px;
-    accent-color: var(--accent); cursor: pointer;
-  }
-  .item-label {
-    position: absolute; inset: 0; border-radius: var(--radius);
-  }
-  .item-body { min-width: 0; }
-  .item-tags {
-    display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px;
-    flex-wrap: wrap;
-  }
-  .item-id {
-    font-family: "IBM Plex Mono"; font-size: 0.76rem; font-weight: 500;
-    color: var(--ink-faint);
-  }
-  .tag-org {
-    font-family: "IBM Plex Mono"; font-size: 0.66rem; font-weight: 500;
-    background: var(--org-bg); color: var(--org-ink);
-    padding: 1px 7px; border-radius: 4px; letter-spacing: 0.03em;
-  }
-  .item p {
-    margin: 0; font-size: 0.94rem; color: var(--ink-soft);
-  }
-  .item p strong { color: var(--ink); font-weight: 600; }
-  label.item-label { cursor: pointer; }
-  .item:has(input:checked) { border-color: var(--good); }
-  .item:has(input:checked) p { color: var(--ink-faint); }
-  .item:has(input:checked) .item-id { color: var(--good); }
-
-  .subgroup {
-    margin: 14px 0 0 36px; padding-left: 14px;
-    border-left: 2px solid var(--line);
-    display: grid; gap: 10px;
-  }
-  .subgroup-title {
-    font-family: "IBM Plex Mono"; font-size: 0.72rem; font-weight: 600;
-    letter-spacing: 0.04em; text-transform: uppercase;
-    color: var(--ink-faint); margin-bottom: -2px;
-  }
-
-  /* ---------- footer ---------- */
-
-  footer {
-    padding: 36px 0 8px; color: var(--ink-faint); font-size: 0.83rem;
-    max-width: 62ch;
-  }
-  footer p { margin: 0 0 10px; }
-  footer code {
-    font-family: "IBM Plex Mono"; background: var(--surface-2);
-    padding: 1px 5px; border-radius: 4px; font-size: 0.82em;
-  }
-
-  @media (max-width: 640px) {
-    .masthead { padding: 40px 0 28px; }
-    .section-num { font-size: 1.6rem; }
-    .section-count { margin-left: 0; width: 100%; order: 3; }
-  }
-</style>
-
-<div class="topbar">
-  <div class="topbar-inner">
-    <span class="topbar-mark">AI&nbsp;PRE-FLIGHT</span>
-    <nav class="topbar-nav" aria-label="Section navigation">
-      <a href="#s1">§1 Plan</a>
-      <a href="#s2">§2 Build</a>
-      <a href="#s3">§3 Test</a>
-      <a href="#s4">§4 Govern</a>
-      <a href="#s5">§5 Deploy</a>
-      <a href="#s6">§6 Guardrails</a>
-    </nav>
-    <span class="progress-pill"><strong id="progressCount">0</strong>/<span id="progressTotal">30</span> checked</span>
-  </div>
-</div>
-
-<main>
-
-  <header class="masthead">
-    <div class="eyebrow">Personal governance checklist · portable across employers</div>
-    <h1>AI Pre-Flight</h1>
-    <p class="lede">
-      A pre-deployment checklist for agentic AI apps — the controls that turn
-      "the model did something" into something you can defend, trace, and shut
-      off. Run it once per project, before the first real deploy.
-    </p>
-    <div class="masthead-meta">
-      <span><b>Origin</b> — synthesized while building agentic apps at Bayer</span>
-      <span><b>Scope</b> — 6 sections, 30 checks</span>
-      <span><b>Storage</b> — your checks save locally, in this browser only</span>
-    </div>
-  </header>
-
-  <section class="block" id="org">
-    <div class="block-head">
-      <div class="block-kicker">Before you start</div>
-      <h2>Org profile</h2>
-      <p class="block-desc">
-        Five checks below are tagged <span class="tag-org">ORG</span> — they name a
-        specific mechanism (a risk gate, an identity platform, a catalog) rather
-        than a universal engineering pattern. Resolve each against whichever row
-        below is current; don't rewrite the checklist itself when the employer
-        changes — add a row instead.
-      </p>
-    </div>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Org</th>
-            <th>Risk gate · §1.4</th>
-            <th>Autonomy cap · §1.3</th>
-            <th>Identity · §2.3</th>
-            <th>Catalog · §5.3</th>
-            <th>Help · §5.5</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="org-name org-current">Bayer <span class="current-tag">through 2026</span></td>
-            <td>BEAT <span class="mono" style="color:var(--ink-faint)">(go/beat)</span></td>
-            <td>GxP → ≤ L3</td>
-            <td>Entra Agent ID</td>
-            <td>Agent Hub</td>
-            <td class="mono">go/agentic-consult</td>
-          </tr>
-          <tr>
-            <td class="org-name next-row">next employer</td>
-            <td class="next-row">?</td>
-            <td class="next-row">?</td>
-            <td class="next-row">?</td>
-            <td class="next-row">?</td>
-            <td class="next-row">?</td>
-          </tr>
-          <tr>
-            <td class="org-name">Personal / OSS</td>
-            <td>none formal — document reasoning in repo</td>
-            <td>apply the same logic by judgment</td>
-            <td>a named human owner is the floor</td>
-            <td>skip, or a relevant OSS registry</td>
-            <td>a personal notes file / this page</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <p class="org-note">
-      <b>Left Bayer, or starting somewhere new?</b> Add a row here for the new
-      context before running this checklist for real — the underlying controls
-      stay the same, only the concrete mechanism in each <span class="tag-org">ORG</span> cell changes.
-    </p>
-  </section>
-
-  <section class="block" id="how">
-    <div class="block-head">
-      <div class="block-kicker">Running the checklist</div>
-      <h2>How to work through it</h2>
-    </div>
-    <ol class="steps">
-      <li><span class="step-num">1</span><p><strong>Identify the applicable org profile row</strong> — this decides what fills every ORG placeholder. Unsure if the project touches a regulated process? Ask before assuming autonomy is uncapped.</p></li>
-      <li><span class="step-num">2</span><p><strong>Investigate before proposing</strong> — check the actual codebase for current status per item; don't take a self-report at face value.</p></li>
-      <li><span class="step-num">3</span><p><strong>One item at a time</strong> — this is a big lift for a new project. Confirm scope, get sign-off on nontrivial choices, then implement.</p></li>
-      <li><span class="step-num">4</span><p><strong>Report status plainly</strong> — done, partial, or missing, with a file reference once code exists. A named, accepted gap is honest; a silent one isn't.</p></li>
-      <li><span class="step-num">5</span><p><strong>Never mark an item done without evidence</strong> — a specific file or function implements it, exercised, not "an LLM would generally handle this."</p></li>
-    </ol>
-  </section>
-
-  <section class="block" id="s1">
-    <div class="section-head">
-      <span class="section-num">1</span>
-      <div class="section-titles">
-        <h2>Plan &amp; Classify</h2>
-        <div class="section-sub">decide what you're building, and how much control it needs</div>
-      </div>
-      <span class="section-count" data-section-count>0/5</span>
-    </div>
-    <ul class="items" data-section>
-      <li class="item"><input type="checkbox" id="i-1-1"><label class="item-label" for="i-1-1"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">1.1</span></div>
-        <p><strong>Define one clear goal &amp; scope.</strong> State a single objective — task-based, process-based, or goal-based. Tight scope is the cheapest control available; resist creep now rather than guardrailing it later.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-1-2"><label class="item-label" for="i-1-2"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">1.2</span></div>
-        <p><strong>Classify the autonomy level, L1–L5.</strong> Cruise control → adaptive assist → supervised autopilot → geofenced self-driving → full autonomy. Pick the lowest level that still does the job; escalate only with justification.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-1-3"><label class="item-label" for="i-1-3"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">1.3</span><span class="tag-org">ORG</span></div>
-        <p><strong>Determine regulated-environment applicability.</strong> Clinical, financial, safety-critical, legal? Cap autonomy per the current org's regulated cap and keep a human in the loop on any critical LLM decision there.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-1-4"><label class="item-label" for="i-1-4"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">1.4</span><span class="tag-org">ORG</span></div>
-        <p><strong>Request a formal risk assessment before rollout.</strong> Use the current org's risk gate. No such gate yet? Note it as a real gap, not a skip — before pilot, not after.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-1-5"><label class="item-label" for="i-1-5"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">1.5</span><span class="tag-org">ORG</span></div>
-        <p><strong>Check what rules already bind this work.</strong> AI usage policy, data handling policy, HIPAA/GDPR or industry-specific rules relevant to the data the agent touches.</p></div>
-      </li>
-    </ul>
-  </section>
-
-  <section class="block" id="s2">
-    <div class="section-head">
-      <span class="section-num">2</span>
-      <div class="section-titles">
-        <h2>Build &amp; Ground</h2>
-        <div class="section-sub">configure the agent on solid, well-described foundations</div>
-      </div>
-      <span class="section-count" data-section-count>0/5</span>
-    </div>
-    <ul class="items" data-section>
-      <li class="item"><input type="checkbox" id="i-2-1"><label class="item-label" for="i-2-1"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">2.1</span></div>
-        <p><strong>Write a clear system prompt.</strong> Role, task, output format, available tools — explicit. Prefer a structured output schema over free text where correctness matters. Ground it in versioned sources, not ad hoc inline facts.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-2-2"><label class="item-label" for="i-2-2"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">2.2</span></div>
-        <p><strong>Name tools accurately.</strong> Tool names often matter more than descriptions for correct selection — treat naming as a first-class design decision.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-2-3"><label class="item-label" for="i-2-3"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">2.3</span><span class="tag-org">ORG</span></div>
-        <p><strong>Assign a clear owner and identity.</strong> A named human, reachable, responsible for the agent's lifecycle. Target the org's identity platform where one exists; a named owner in the repo is the floor everywhere else.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-2-4"><label class="item-label" for="i-2-4"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">2.4</span></div>
-        <p><strong>Create an Agent Card.</strong> A machine-readable descriptor of scope, owner, autonomy level, and known limitations — discoverable without reading all the code.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-2-5"><label class="item-label" for="i-2-5"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">2.5</span></div>
-        <p><strong>Verify grounding data is complete and reliable.</strong> Stale docs or an incomplete corpus are the most common cause of bad output — rule this out before blaming the model.</p></div>
-      </li>
-    </ul>
-  </section>
-
-  <section class="block" id="s3">
-    <div class="section-head">
-      <span class="section-num">3</span>
-      <div class="section-titles">
-        <h2>Test &amp; Validate</h2>
-        <div class="section-sub">prove it works, and fails, safely, before anyone relies on it</div>
-      </div>
-      <span class="section-count" data-section-count>0/4</span>
-    </div>
-    <ul class="items" data-section>
-      <li class="item"><input type="checkbox" id="i-3-1"><label class="item-label" for="i-3-1"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">3.1</span></div>
-        <p><strong>Conduct eval-driven testing.</strong> Happy path, edge cases, failure cases — defined explicitly, with documented coverage a reviewer can trust without re-deriving it.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-3-2"><label class="item-label" for="i-3-2"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">3.2</span></div>
-        <p><strong>Validate accuracy and bias.</strong> Measure against real ground truth, not spot checks. Check whether output is systematically worse for some input subpopulation — and re-check after any material change.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-3-3"><label class="item-label" for="i-3-3"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">3.3</span></div>
-        <p><strong>Test failure and escalation behavior.</strong> When a step fails, does it self-correct within bounds, or escalate to a human? Confirm the guardrails hold under a real failure, not just the success path.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-3-4"><label class="item-label" for="i-3-4"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">3.4</span></div>
-        <p><strong>Separate deterministic from probabilistic logic.</strong> Cap the LLM parts at a conservative autonomy level in regulated contexts; don't let deterministic business logic quietly become model-decided.</p></div>
-      </li>
-    </ul>
-  </section>
-
-  <section class="block" id="s4">
-    <div class="section-head">
-      <span class="section-num">4</span>
-      <div class="section-titles">
-        <h2>Govern &amp; Oversee</h2>
-        <div class="section-sub">wire in guardrails, visibility, and safety controls</div>
-      </div>
-      <span class="section-count" data-section-count>0/4</span>
-    </div>
-    <ul class="items" data-section>
-      <li class="item"><input type="checkbox" id="i-4-1"><label class="item-label" for="i-4-1"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">4.1</span></div>
-        <p><strong>Build in human-in-the-loop checkpoints.</strong> Oversight never reaches zero on anything high-stakes. An AI-proposed change is never auto-committed — it needs an explicit human "Apply."</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-4-2"><label class="item-label" for="i-4-2"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">4.2</span></div>
-        <p><strong>Enable monitoring and call tracing.</strong> End-to-end tracing of calls, tokens, cost, and outcome per invocation — reviewable after the fact, not just while watching it run.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-4-3"><label class="item-label" for="i-4-3"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">4.3</span></div>
-        <p><strong>Address AI security explicitly.</strong> Confidentiality, integrity, availability — including prompt injection by name. Least privilege: restrict the agent to only the tools it actually needs.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-4-4"><label class="item-label" for="i-4-4"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">4.4</span></div>
-        <p><strong>Set content-safety and cost controls.</strong> Guard against inaccurate output reaching a human as if authoritative. A kill switch and a budget cap, with real spend visibility.</p></div>
-      </li>
-    </ul>
-  </section>
-
-  <section class="block" id="s5">
-    <div class="section-head">
-      <span class="section-num">5</span>
-      <div class="section-titles">
-        <h2>Document, Train &amp; Deploy</h2>
-        <div class="section-sub">make it usable, discoverable, and accountable</div>
-      </div>
-      <span class="section-count" data-section-count>0/5</span>
-    </div>
-    <ul class="items" data-section>
-      <li class="item"><input type="checkbox" id="i-5-1"><label class="item-label" for="i-5-1"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">5.1</span></div>
-        <p><strong>Prepare user guidance.</strong> How to use it, its limits, when to escalate, who owns it — part of making the capability safely discoverable, not just usable.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-5-2"><label class="item-label" for="i-5-2"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">5.2</span></div>
-        <p><strong>Confirm operator training</strong> wherever the agent touches a regulated process — operators need to understand its limits, not just have read a README once.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-5-3"><label class="item-label" for="i-5-3"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">5.3</span><span class="tag-org">ORG</span></div>
-        <p><strong>Register in a shared, discoverable catalog</strong> if the current org names one. Skip cleanly if it genuinely has none — don't invent a registry that doesn't exist.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-5-4"><label class="item-label" for="i-5-4"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">5.4</span></div>
-        <p><strong>Final sign-off and owner accountability.</strong> The named owner records a dated go/no-go, confirming every gate above actually passed. Append new decisions as scope grows — never overwrite an old one.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-5-5"><label class="item-label" for="i-5-5"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">5.5</span><span class="tag-org">ORG</span></div>
-        <p><strong>Know where to get help.</strong> Name the specific escalation path — a consult channel, a governance team, an internal community — per the current org.</p></div>
-      </li>
-    </ul>
-  </section>
-
-  <section class="block" id="s6">
-    <div class="section-head">
-      <span class="section-num">6</span>
-      <div class="section-titles">
-        <h2>Golden Standard &amp; Guardrails</h2>
-        <div class="section-sub">the concrete technical patterns behind §4</div>
-      </div>
-      <span class="section-count" data-section-count>0/7</span>
-    </div>
-    <ul class="items" data-section>
-      <li class="item"><input type="checkbox" id="i-6-1"><label class="item-label" for="i-6-1"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">6.1</span></div>
-        <p><strong>Kill switch.</strong> One flag, checked before rate limiting or budget, in every path that calls the model. Genuinely accessible and actually tested — not just theoretically present.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-6-2"><label class="item-label" for="i-6-2"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">6.2</span></div>
-        <p><strong>Rate limit + daily cost budget.</strong> Enforced server-side, never client-side. Size the cap to the shared credential actually in use — especially once fire-and-forget jobs remove the natural human throttle.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-6-3"><label class="item-label" for="i-6-3"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">6.3</span></div>
-        <p><strong>Agent drift tracking.</strong> Detect degrading output quality over time — a rising defect severity or remediation-cycle count — rather than silently absorbing it. Detection triggers a human decision; correction stays a human call.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-6-4"><label class="item-label" for="i-6-4"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">6.4</span></div>
-        <p><strong>Memory and amnesia options.</strong> Be explicit about what the agent remembers, across turns and sessions, and for how long. No cross-session memory unless it was a deliberate decision with its own retention story.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-6-5"><label class="item-label" for="i-6-5"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">6.5</span></div>
-        <p><strong>Traceability / audit trails.</strong> Metadata-only records — timestamps, status, cost, tokens, decision outcomes — with a defined retention period. Behavior should be fully reconstructable after the fact.</p></div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-6-6"><label class="item-label" for="i-6-6"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">6.6</span></div>
-        <p><strong>Cyber security guardrails.</strong> Untrusted input treated as data, never instructions. A CSP restricting egress to same-origin. Zero client-side credentials — every privileged call goes through a server-side relay.</p></div>
-        <div class="subgroup">
-          <div class="subgroup-title">Prompt injection</div>
-          <p style="font-size:0.87rem">Flag suspicious phrases ("ignore previous instructions") for human review, not silent auto-block — false positives on legitimate content are expected. Any AI-proposed write needs explicit human approval first.</p>
-          <div class="subgroup-title">Data exfiltration</div>
-          <p style="font-size:0.87rem">CSP allowlist blocks injected code from calling out externally. Never expose an upstream credential client-side. Audit records stay metadata-only. Prefer zero third-party script dependencies.</p>
-          <div class="subgroup-title">Unauthorized access &amp; least privilege</div>
-          <p style="font-size:0.87rem">Name what access control actually is today — a shared secret is a legitimate, honestly-documented stopgap for a small pilot, with a named real fix before broader rollout. Scope bindings per-function where the platform allows it.</p>
-        </div>
-      </li>
-      <li class="item"><input type="checkbox" id="i-6-7"><label class="item-label" for="i-6-7"></label>
-        <div class="item-body"><div class="item-tags"><span class="item-id">6.7</span></div>
-        <p><strong>Document the full deployment architecture.</strong> Models, endpoints, data pipelines, infrastructure, and dependencies — in one place, not scattered across tribal knowledge.</p></div>
-      </li>
-    </ul>
-  </section>
-
-  <footer>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px 20px;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+    }
+    .card {
+      max-width: 420px;
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 32px 28px;
+      box-shadow: 0 1px 2px rgba(20, 30, 25, 0.06), 0 6px 16px rgba(20, 30, 25, 0.05);
+    }
+    .eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 10px;
+    }
+    h1 {
+      font-family: Archivo, system-ui, sans-serif;
+      font-size: 1.55rem;
+      margin: 0 0 12px;
+      letter-spacing: -0.02em;
+    }
+    p {
+      margin: 0 0 14px;
+      color: var(--ink-soft);
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+    a.btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+    a.btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    a.btn-primary:hover { filter: brightness(1.05); }
+    a.btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+    }
+    a.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <p class="eyebrow">AI Pre-Flight</p>
+    <h1>Checklist is not public</h1>
     <p>
-      Not an official standard from any organization — a personal working
-      synthesis, meant to drive real engineering work rather than get filled in
-      for its own sake. Full guidance, org-profile mechanics, and reference
-      implementation pointers live alongside this page in <code>SKILL.md</code>.
+      The full interactive Pre-Flight board is shared privately on request —
+      it is a working tool, not a public download.
     </p>
-    <p>Checkbox state saves to <code>localStorage</code> in this browser only — nothing is sent anywhere.</p>
-  </footer>
-
-</main>
-
-<script>
-  (function () {
-    var STORAGE_KEY = 'ai-preflight-checked-v1';
-    var boxes = Array.prototype.slice.call(document.querySelectorAll('.item input[type="checkbox"]'));
-    var total = boxes.length;
-    document.getElementById('progressTotal').textContent = total;
-
-    var saved = {};
-    try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch (e) { saved = {}; }
-
-    boxes.forEach(function (box) {
-      if (saved[box.id]) box.checked = true;
-    });
-
-    function save() {
-      var state = {};
-      boxes.forEach(function (box) { if (box.checked) state[box.id] = true; });
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
-    }
-
-    function updateCounts() {
-      var checkedTotal = 0;
-      document.querySelectorAll('[data-section]').forEach(function (list) {
-        var items = list.querySelectorAll('input[type="checkbox"]');
-        var checked = 0;
-        items.forEach(function (b) { if (b.checked) checked++; });
-        checkedTotal += checked;
-        var badge = list.previousElementSibling.querySelector('[data-section-count]');
-        if (badge) badge.textContent = checked + '/' + items.length;
-      });
-      document.getElementById('progressCount').textContent = checkedTotal;
-    }
-
-    boxes.forEach(function (box) {
-      box.addEventListener('change', function () { save(); updateCounts(); });
-    });
-
-    updateCounts();
-  })();
-</script>
+    <p>
+      If you would like access, use the contact form on my portfolio and say
+      you are asking about AI Pre-Flight.
+    </p>
+    <div class="actions">
+      <a class="btn btn-primary" href="/#contact">Contact me</a>
+      <a class="btn btn-ghost" href="/projects/ai-preflight">Back to project</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -183,24 +183,24 @@ export const projects: Project[] = [
     solution:
       "I did not create an official corporate standard from scratch. I built a generic, portable version based on building and deploying agents at Bayer — taking what I learned from internal Agentic AI / AI Governance guidance and GenAI learning material, and turning it into a personal checklist with placeholders for whoever the next employer is (risk gate, identity, catalog, help channel).",
     deployment:
-      "Interactive checklist on this site (progress saved in the browser). Also available as a Claude Code skill so I can run /ai-preflight against a real codebase. Explicitly not Bayer policy — a practitioner synthesis. Reference apps: Use Summary Table and APRS.",
+      "The interactive checklist itself is not published on this site — ask via the contact form if you want access. I also keep it as a private Claude Code skill (/ai-preflight) against real repos. Explicitly not Bayer policy — a practitioner synthesis. Reference apps: Use Summary Table and APRS.",
     metrics: [
       { label: "Sections", value: "6" },
       { label: "Checklist items", value: "~30" },
       { label: "Apps applied", value: "2+" },
-      { label: "Form", value: "Interactive HTML + skill" },
+      { label: "Access", value: "On request" },
     ],
     stack: [
       "AI governance practice",
       "HITL · kill switch · audit",
-      "Org-profile placeholders",
+      "Portable across employers",
       "Agent Card / sign-off",
       "Claude Code skill",
     ],
     links: [
       {
-        label: "Open checklist",
-        href: "/ai-preflight/checklist.html",
+        label: "Request the checklist",
+        href: "/#contact",
       },
     ],
     featured: true,
@@ -213,7 +213,7 @@ export const projects: Project[] = [
       {
         question: "How it works",
         answer:
-          "For each item, look at the real codebase (done / partial / missing / accepted gap), then implement — no empty ticks. Items that name an org mechanism (risk assessment, managed identity, agent catalog) use a small profile table so the same board still works if the employer changes.",
+          "For each item, look at the real codebase (done / partial / missing / accepted gap), then implement — no empty ticks. Org-specific mechanisms (risk assessment, managed identity, catalog) stay in my private working copy; the public portfolio only describes the idea.",
       },
       {
         question: "Why it works",
@@ -223,12 +223,12 @@ export const projects: Project[] = [
       {
         question: "Why I built a generic version",
         answer:
-          "Bayer's internal material is useful inside Bayer. I needed something I could reuse on the next agent — and that would still make sense at another employer. Distilling a portable checklist with [ORG] placeholders was the honest shape.",
+          "I needed something I could reuse on the next agent — and that would still make sense at another employer. Distilling a portable checklist from that practice was the honest shape. The detailed board stays private; this page is the public summary.",
       },
       {
         question: "What its limitations are",
         answer:
-          "Not an official standard of any organisation. Bayer mechanisms appear as examples in the org profile, not as a claim that this checklist is Bayer policy. Training sign-off and Hub registration stay project-specific follow-ups.",
+          "Not an official standard of any organisation. Training sign-off and catalog registration stay project-specific follow-ups. The full interactive checklist is shared only on request.",
       },
       {
         question: "What alternatives exist",

@@ -103,17 +103,21 @@ export default async function ProjectPage({ params }: Props) {
 
             {project.links.length > 0 && (
               <section className="mt-10 flex flex-wrap gap-4">
-                {project.links.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-full border border-ink/15 px-5 py-2.5 text-sm font-medium text-ink transition hover:border-sage hover:text-sage-deep"
-                  >
-                    {link.label}
-                  </a>
-                ))}
+                {project.links.map((link) => {
+                  const external = /^https?:\/\//i.test(link.href);
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      {...(external
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                      className="rounded-full border border-ink/15 px-5 py-2.5 text-sm font-medium text-ink transition hover:border-sage hover:text-sage-deep"
+                    >
+                      {link.label}
+                    </a>
+                  );
+                })}
               </section>
             )}
           </div>
