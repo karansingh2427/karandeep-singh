@@ -173,7 +173,7 @@ export const projects: Project[] = [
     slug: "ai-preflight",
     title: "AI Pre-Flight Checklist",
     tagline:
-      "A portable checklist for shipping agentic AI — a generic version I built from deploying agents at Bayer.",
+      "A portable checklist for shipping agentic AI — distilled from building and deploying agents in regulated life sciences.",
     category: "AI",
     status: "Personal working standard · used on Use Summary Table & APRS",
     problem:
@@ -181,9 +181,9 @@ export const projects: Project[] = [
     value:
       "A reusable Pre-Flight board I can run before a pilot or a broader rollout. It turns governance into concrete work (a kill switch in the repo, an audit trail, a named owner) instead of a slide. I have already applied it to the use-summary extractor and the APRS tool.",
     solution:
-      "I did not create an official corporate standard from scratch. I built a generic, portable version based on building and deploying agents at Bayer — taking what I learned from internal Agentic AI / AI Governance guidance and GenAI learning material, and turning it into a personal checklist with placeholders for whoever the next employer is (risk gate, identity, catalog, help channel).",
+      "I did not create an official corporate standard from scratch. I built a generic, portable version from shipping agentic tools in regulated workflows — turning Agentic AI / AI Governance practice and GenAI learning into a personal checklist with placeholders for whichever organisation you are in (risk gate, identity, catalog, help channel).",
     deployment:
-      "The interactive checklist itself is not published on this site — ask via the contact form if you want access. I also keep it as a private Claude Code skill (/ai-preflight) against real repos. Explicitly not Bayer policy — a practitioner synthesis. Reference apps: Use Summary Table and APRS.",
+      "The interactive checklist itself is not published on this site — ask via the contact form if you want access. I also keep it as a private Claude Code skill (/ai-preflight) against real repos. A practitioner synthesis, not an official policy document. Reference apps: Use Summary Table and APRS.",
     metrics: [
       { label: "Sections", value: "6" },
       { label: "Checklist items", value: "~30" },

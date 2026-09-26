@@ -56,7 +56,7 @@ Skills: Document AI · Excel automation · Regulatory workflows · Human-in-the-
 **Project name:** AI Pre-Flight Checklist
 
 **Description:**
-A portable governance checklist for shipping agentic AI. I did not invent an official corporate standard from scratch — I built a generic version based on building and deploying agents at Bayer, so I can reuse the same board (kill switch, HITL, audit, cost, injection, ownership, sign-off) on the next agent, including outside Bayer.
+A portable governance checklist for shipping agentic AI. I did not invent an official corporate standard from scratch — I built a generic version from building and deploying agents in regulated life sciences, so I can reuse the same board (kill switch, HITL, audit, cost, injection, ownership, sign-off) on the next agent.
 
 Form: private interactive checklist (~6 sections, ~30 items) plus a Claude Code skill — shared on request, not published open on the portfolio. Already applied to Use Summary Table and APRS.
 
@@ -118,7 +118,7 @@ Skills: Programme management · Business analysis · Agile · Regulated IT · Ch
 ## LinkedIn Featured (optional short pins)
 
 1. **Agentic AI in production** — regulatory workflows from hours/months of manual work to minutes of extraction + QC; teams refer the next use case. https://karandeepsingh.vercel.app/projects/use-summary-table
-2. **AI Pre-Flight** — portable governance checklist distilled from shipping agents at Bayer. https://karandeepsingh.vercel.app/projects/ai-preflight
+2. **AI Pre-Flight** — portable governance checklist distilled from shipping agents in regulated work. https://karandeepsingh.vercel.app/projects/ai-preflight
 3. **AgriGuide is live** — digital PPP labels; tech + reference-data work streams and 27-country coordination toward EU 2028. https://www.agriguide.eu/
 4. **Portfolio** — Global Project & Program Lead and Product Owner · agentic AI delivery in life sciences. https://karandeepsingh.vercel.app/
 

@@ -15,7 +15,7 @@ export const profile = {
   about: [
     "I work at Bayer in Monheim, as Global Project & Program Lead and Product Owner. The job is regulatory digital transformation in life sciences: getting label and registration data off paper, and putting AI into the workflows the department actually runs. I have been at Bayer since 2018, including Pharma R&D IT in Leverkusen before this role.",
     "For EPA use-summary tables, analysts were spending 45–90 minutes on every pesticide label, copying crop and rate data into a fixed schema. The system now in production drafts that table from the PDF. A reviewer still signs it off, in about half an hour, and manual work on the step is down by about 60–70%. A second system is in production for country registration portfolios. It reads a safety data sheet and drafts the toxicology and ecotoxicology sections, which are most of the work per active ingredient. A reviewer still signs that off. Both ships with the same kind of guardrails: kill switch, cost cap, audit trail.",
-    "The scale around it is the label-data platform: 27 countries, more than 100 labels a quarter, a bit over €500k a year, vendor contracts over €250k. AgriGuide is the industry programme, live at agriguide.eu with BASF, Syngenta and Corteva. Structured authoring cut label-authoring effort by about 40–50%. Bayer is working toward a digitised EU portfolio by 2028. Separately, I keep a portable AI Pre-Flight checklist — a generic version I built from deploying agents at Bayer — so the next agent does not reinvent governance from scratch.",
+    "The scale around it is the label-data platform: 27 countries, more than 100 labels a quarter, a bit over €500k a year, vendor contracts over €250k. AgriGuide is the industry programme, live at agriguide.eu with BASF, Syngenta and Corteva. Structured authoring cut label-authoring effort by about 40–50%. Bayer is working toward a digitised EU portfolio by 2028. Separately, I keep a portable AI Pre-Flight checklist — a generic version distilled from shipping agents in regulated work — so the next agent does not reinvent governance from scratch.",
     "Before Bayer I did a PhD in physics at Cologne and Jülich, on nanoparticles and red blood cells. Outside work I teach yoga, meditation and breathwork at Karuṇā Space.",
   ],
   openTo: [
@@ -50,7 +50,7 @@ export const profile = {
     {
       name: "Safe enough to run",
       proof:
-        "Kill switch, spend cap, audit trail, human sign-off — and a portable AI Pre-Flight checklist I distilled from shipping agents at Bayer (not an official standard; a generic version I reuse on each new agent).",
+        "Kill switch, spend cap, audit trail, human sign-off — and a portable AI Pre-Flight checklist I distilled from shipping agents in regulated work (not an official standard; a generic version I reuse on each new agent).",
     },
   ],
   capabilities: [
