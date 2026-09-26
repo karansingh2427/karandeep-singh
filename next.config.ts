@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/projects/agriguide-digitisation",
+        destination: "/projects/global-digital-label-programme",
+        permanent: true,
+      },
+      {
         source: "/:path*",
         has: [{ type: "host", value: "karandeepsingh.vercel.app" }],
         destination: "https://karandeepsingh.net/:path*",

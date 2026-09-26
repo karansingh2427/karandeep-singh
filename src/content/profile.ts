@@ -14,8 +14,8 @@ export const profile = {
   karunaEmail: "karan@karuna-space.com",
   about: [
     "I work at Bayer in Monheim, as Global Project & Program Lead and Product Owner. The job is regulatory digital transformation in life sciences: getting label and registration data off paper, and putting AI into the workflows the department actually runs. I have been at Bayer since 2018, including Pharma R&D IT in Leverkusen before this role.",
-    "For EPA use-summary tables, analysts were spending 45–90 minutes on every pesticide label, copying crop and rate data into a fixed schema. The system now in production drafts that table from the PDF. A reviewer still signs it off, in about half an hour, and manual work on the step is down by about 60–70%. A second system is in production for country registration portfolios. It reads a safety data sheet and drafts the toxicology and ecotoxicology sections, which are most of the work per active ingredient. A reviewer still signs that off. Both ships with the same kind of guardrails: kill switch, cost cap, audit trail.",
-    "The scale around it is the label-data platform: 27 countries, more than 100 labels a quarter, a bit over €500k a year, vendor contracts over €250k. AgriGuide is the industry programme, live at agriguide.eu with BASF, Syngenta and Corteva. Structured authoring cut label-authoring effort by about 40–50%. Bayer is working toward a digitised EU portfolio by 2028. Separately, I keep a portable AI Pre-Flight checklist — a generic version distilled from shipping agents in regulated work — so the next agent does not reinvent governance from scratch.",
+    "For EPA use-summary tables, regulatory managers were spending 100+ hours building the tables by hand from pesticide-label PDFs. The system now in production drafts those tables in a few minutes. Managers only spot-check them, which takes minutes, so the submission gets to market faster. A run costs about $0.50–$0.75 per label. I owned that workflow from the manual process through to the live system. A second system is in production for country registration portfolios. It reads a safety data sheet and drafts the toxicology and ecotoxicology sections, which are most of the work per active ingredient. A reviewer still signs that off. Both ship with the same guardrails: kill switch, cost cap, audit trail.",
+    "The scale around it is the label-data platform: 27 countries, more than 100 labels a quarter, a bit over €500k a year, vendor contracts over €250k. I lead the global digital label programme. The mission is to turn static labels into trusted, structured data that people, systems and machines can reuse. AgriGuide is the EU project, live at agriguide.eu with BASF, Syngenta and Corteva. The same programme runs in APAC, North America, ANZ and LATAM. Structured authoring cut label-authoring effort by about 40–50%. Bayer is working toward a digitised EU portfolio by 2028. Separately, I keep a portable AI Pre-Flight checklist — a generic version distilled from shipping agents in regulated work — so the next agent does not reinvent governance from scratch.",
     "Before Bayer I did a PhD in physics at Cologne and Jülich, on nanoparticles and red blood cells. Outside work I teach yoga, meditation and breathwork at Karuṇā Space.",
   ],
   openTo: [
@@ -99,16 +99,16 @@ export const profile = {
         "AI extraction is deployed inside Bayer life sciences regulatory work, on the submissions and registration files the department is responsible for.",
     },
     {
-      metric: "~60–70%",
-      label: "less manual work",
+      metric: "100+ hrs",
+      label: "no longer spent by hand",
       detail:
-        "Use-summary tables: 149 pages to 155 rows, 88% field-level accuracy, review still required. That step used to take 45–90 minutes per label, across the portfolio.",
+        "Regulatory managers spent 100+ hours building EPA use-summary tables by hand from pesticide-label PDFs. Those tables are now drafted in a few minutes, then spot-checked. About $0.50–$0.75 per label, and the submission gets to market faster.",
     },
     {
       metric: "1,500+",
       label: "labels on AgriGuide",
       detail:
-        "Already published on agriguide.eu, with BASF, Syngenta, Corteva and others. Bayer is working toward a digitised EU portfolio by 2028.",
+        "AgriGuide is the EU project in the global digital label programme I lead. Already published on agriguide.eu, with BASF, Syngenta, Corteva and others. The programme also runs in APAC, North America, ANZ and LATAM. Bayer is working toward a digitised EU portfolio by 2028.",
     },
     {
       metric: "€500k+",
@@ -127,7 +127,7 @@ export const profile = {
         "Product owner for the label-data platform used in 27 countries. About €500k a year, vendor contracts over €250k, and a backlog aimed at more than 100 labels a quarter.",
         "Two production AI systems in life sciences regulatory workflows, both with a person checking the output. One drafts EPA use-summary tables. The other drafts toxicology and ecotoxicology in country registration workbooks from safety data sheets.",
         "The use-summary system is in production: 149 pages to 155 rows, 28 columns, 88% field-level accuracy against an expert table, source text kept on every cell, with a kill switch and a spend cap.",
-        "On AgriGuide I worked with Bayer, BASF, Syngenta and Corteva on the tech and reference-data streams, and on lining up IT, Marketing and Product Supply across Bayer's countries. It is live at agriguide.eu.",
+        "I lead the global digital label programme. AgriGuide is the EU project, live at agriguide.eu, with Bayer, BASF, Syngenta and Corteva. I worked the tech and reference-data streams there, and lined up IT, Marketing and Product Supply across Bayer's countries. The programme also runs in APAC, North America, ANZ and LATAM.",
       ],
     },
     {
@@ -136,9 +136,9 @@ export const profile = {
       period: "06/2018 – 07/2021",
       role: "Project & Product Manager, Pharma R&D IT",
       bullets: [
-        "Ran a digital programme of about €1 million, from what the scientists asked for through to a first release. A steering committee watched the money.",
-        "Turned lab requests into a roadmap, user stories and a scope we could actually ship. Delivery was Scrum and Kanban, plus testing and training.",
-        "I was the person in the middle: scientists, the business, and the teams building the software.",
+        "Led PIx Portfolio Tracking (PIx PT) at Bayer Pharma R&D IT. It tracked every Pharma indication from Phase 0 to Phase 2, from what the labs asked for through to a release they could use. About 500–1,000 researchers, about €1 million, and a steering committee watched the money. PIx was connected to that tracking.",
+        "I was one of the business analysts on the PIx platform, and did data analysis for a PIx module.",
+        "I was the person in the middle for PIx PT: scientists, the business, and the teams doing the work. Requests became a roadmap, user stories and a scope we could ship, with Scrum, Kanban, testing and training.",
       ],
     },
     {

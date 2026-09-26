@@ -4,10 +4,30 @@ import type { Metadata } from "next";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getProject, projects } from "@/content/projects";
+import { ImpactTable } from "@/components/ImpactTable";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
+
+function linkify(text: string) {
+  const parts = text.split(/(agriguide\.eu)/g);
+  return parts.map((part, index) =>
+    part === "agriguide.eu" ? (
+      <a
+        key={index}
+        href="https://www.agriguide.eu/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline decoration-line underline-offset-4 transition hover:text-sage-deep"
+      >
+        agriguide.eu
+      </a>
+    ) : (
+      part
+    ),
+  );
+}
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -54,16 +74,46 @@ export default async function ProjectPage({ params }: Props) {
               {project.tagline}
             </p>
 
-            <ul className="mt-12 flex flex-wrap gap-x-8 gap-y-3 border-y border-line py-8">
-              {project.metrics.map((m) => (
-                <li key={m.label}>
-                  <span className="font-display text-2xl text-sage-deep">
-                    {m.value}
-                  </span>
-                  <span className="ml-2 text-sm text-ink-soft">{m.label}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="mt-12">
+              <ImpactTable rows={project.impact} />
+            </div>
+
+            {(project.mission || project.vision) && (
+              <div className="mt-14 grid gap-12 md:grid-cols-2">
+                {project.mission && (
+                  <section>
+                    <h2 className="font-display text-2xl text-ink">Mission</h2>
+                    <p className="mt-4 text-sm leading-relaxed text-ink-soft md:text-base">
+                      {project.mission}
+                    </p>
+                  </section>
+                )}
+                {project.vision && (
+                  <section>
+                    <h2 className="font-display text-2xl text-ink">Vision</h2>
+                    <p className="mt-4 text-sm leading-relaxed text-ink-soft md:text-base">
+                      {project.vision}
+                    </p>
+                  </section>
+                )}
+              </div>
+            )}
+
+            {project.valueEnablers && project.valueEnablers.length > 0 && (
+              <section className="mt-14">
+                <h2 className="font-display text-2xl text-ink">Value enablers</h2>
+                <dl className="mt-6 divide-y divide-line border-t border-line">
+                  {project.valueEnablers.map((item) => (
+                    <div key={item.title} className="grid gap-2 py-5 md:grid-cols-[16rem_1fr] md:gap-8">
+                      <dt className="font-medium text-ink">{item.title}</dt>
+                      <dd className="text-sm leading-relaxed text-ink-soft md:text-base">
+                        {item.detail}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </section>
+            )}
 
             <div className="mt-14 grid gap-12 md:grid-cols-2">
               <section>
@@ -87,7 +137,7 @@ export default async function ProjectPage({ params }: Props) {
               <section>
                 <h2 className="font-display text-2xl text-ink">Deployment</h2>
                 <p className="mt-4 text-sm leading-relaxed text-ink-soft md:text-base">
-                  {project.deployment}
+                  {linkify(project.deployment)}
                 </p>
               </section>
             </div>

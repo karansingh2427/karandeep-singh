@@ -83,7 +83,7 @@ Outcome: digital labels from many countries and companies already published (1,5
 
 Skills: Digital transformation · Change management · Cross-company consortia · Reference data · Programme delivery · Regulated life sciences
 
-**Media / links:** https://www.agriguide.eu/ · Portfolio: https://karandeepsingh.vercel.app/projects/agriguide-digitisation
+**Media / links:** https://www.agriguide.eu/ · Portfolio: https://karandeepsingh.net/projects/global-digital-label-programme
 
 ---
 

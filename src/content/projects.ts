@@ -3,44 +3,148 @@ export type DepthAnswer = {
   answer: string;
 };
 
+export type ImpactRow = {
+  label: string;
+  before: string;
+  after: string;
+};
+
 export type Project = {
   slug: string;
   title: string;
   tagline: string;
-  category: "AI" | "Platform" | "Programme" | "Initiative";
+  category: "AI agent" | "AI" | "Platform" | "Programme" | "Initiative";
   status: string;
   problem: string;
   value: string;
   solution: string;
   deployment: string;
+  impact: ImpactRow[];
   metrics: { label: string; value: string }[];
   stack: string[];
   links: { label: string; href: string }[];
   featured: boolean;
   depth?: DepthAnswer[];
+  mission?: string;
+  vision?: string;
+  valueEnablers?: { title: string; detail: string }[];
 };
 
 export const projects: Project[] = [
   {
+    slug: "global-digital-label-programme",
+    title: "Global Digital Label Programme",
+    tagline:
+      "Turns static product labels into trusted, structured data that people, systems and machines can reuse. I lead it across the EU, APAC, North America, ANZ and LATAM.",
+    category: "Programme",
+    status: "Global",
+    problem:
+      "Product and use information sat in static documents. It was assembled by hand, spread across systems, hard to keep current, and not structured enough for reuse by regulatory teams, digital products, farm-management systems or application equipment.",
+    value:
+      "The near-term value is less manual effort and less duplication. Inside Bayer, writing labels from structured data cut authoring effort by about 40–50%, and overall workflow effort by about 50%. AgriGuide, the EU project, is online: a farmer can scan a label and get the conditions of use that apply in the field. More than 1,500 labels are published, across most of the EU, with all 27 countries in scope. The same data foundation is what later use cases sit on.",
+    mission:
+      "Turn product labels from static documents into trusted, structured, reusable data, and make that data available to the people, systems and machines that need it.",
+    vision:
+      "A connected label-data ecosystem. Ownership is clear, the data flows from authoritative sources, and the same information supports automated label creation, digital labels, compliant use in the field, and later field-specific decisions.",
+    valueEnablers: [
+      {
+        title: "Trusted, reusable label information",
+        detail:
+          "Complete, current label information in a structured format, so teams and connected systems are not extracting it from documents again.",
+      },
+      {
+        title: "Faster creation and maintenance",
+        detail:
+          "Label authoring and review tied to structured source data, so there is less copying and a shorter cycle when an approved change has to go out.",
+      },
+      {
+        title: "One foundation, several use cases",
+        detail:
+          "Build the data once, then use it for regulatory work, customer-facing digital labels and digital farming. AgriGuide is the EU project on that foundation.",
+      },
+      {
+        title: "Access at the moment of use",
+        detail:
+          "Rates, dose and conditions of use in a form someone can search and apply, including on a phone in the field.",
+      },
+      {
+        title: "Compliance in the workflow",
+        detail:
+          "Authorised conditions in a machine-readable form, so farm-management systems and application equipment can follow the label.",
+      },
+      {
+        title: "A path to field-specific decisions",
+        detail:
+          "From country-level instructions on a document toward guidance that can take local conditions into account.",
+      },
+    ],
+    solution:
+      "I lead the global digital label programme. On the EU project, AgriGuide, the work is a CropLife Europe delivery with Bayer, BASF, Syngenta, Corteva and others. My part there was the tech stream, the reference data, Bayer's rollout across 27 countries, and getting IT, Marketing and Product Supply onto one plan.",
+    deployment:
+      "In the EU, AgriGuide is live at agriguide.eu. Pilots started in Germany, Italy and Romania, and Bayer is working toward a digitised EU portfolio by 2028. The global programme, which I lead, also runs in APAC, North America, ANZ and LATAM.",
+    impact: [
+      { label: "Programme", before: "No programme", after: "Global: EU, APAC, North America, ANZ, LATAM" },
+      { label: "EU", before: "Separate country builds", after: "27 countries, 2028" },
+      { label: "Label in the field", before: "Paper", after: "EU: scan, 1,500+ labels live" },
+      { label: "Authoring effort", before: "Previous practice", after: "About 40–50% less" },
+    ],
+    metrics: [
+      { label: "Labels published", value: "1,500+" },
+      { label: "EU ambition", value: "27 countries" },
+      { label: "Authoring effort", value: "~40–50% ↓" },
+      { label: "EU deadline", value: "2028" },
+    ],
+    stack: [
+      "Tech work stream",
+      "Reference data work stream",
+      "Cross-company alignment (CropLife Europe)",
+      "Change & country coordination",
+      "IT · Marketing · Product Supply",
+      "Digital labels / SaaS",
+    ],
+    links: [
+      { label: "agriguide.eu", href: "https://www.agriguide.eu/" },
+    ],
+    featured: true,
+  },
+  {
     slug: "use-summary-table",
     title: "Use Summary Table Extractor",
     tagline:
-      "Bayer — drafts the EPA use-summary table from a pesticide label. A reviewer still signs it off before it goes anywhere.",
-    category: "AI",
+      "A production AI agent at Bayer. It drafts EPA use-summary tables from pesticide labels. Reviewers spot-check before anything goes out.",
+    category: "AI agent",
     status: "In production at Bayer · used on regulatory submissions",
     problem:
-      "Use-summary tables for EPA submission were filled by reading long labels by hand. Crop, rate and use-site data is scattered through the narrative, the rate tables and the appendices. One label took 45–90 minutes. Across a portfolio, that is weeks of transcription.",
+      "EPA use-summary tables were filled by reading pesticide labels by hand. Crop, rate and use-site data is scattered through the narrative, the rate tables and the appendices. Regulatory managers were spending 100+ hours building those tables from the PDFs.",
     value:
-      "Manual work on the step is down by about 60–70%. The output is a 28-column table, ready for an EPA filing or a regulatory database after review. That review still takes about half an hour, which is the point.",
+      "The tables are now drafted in a few minutes. Regulatory managers only spot-check them, which takes minutes, so the submission gets to market faster. A label costs about $0.50–$0.75 to run.",
     solution:
       "A browser tool with two paths. One uses rules and runs offline, for bulk runs. The other sends the label text through Bayer's AI gateway, then a second pass checks the result. Every row keeps a confidence score, the page number and the source sentence, and you can edit the cell before exporting Excel.",
     deployment:
       "Deployed on Agentrix (container runtime) and through Bayer's AI gateway for model calls. Secrets stay on the server. There is a job queue, a kill switch, a rate limit, a daily cost cap, an audit trail, content-safety flags and drift checks — the Pre-Flight guardrails I apply when shipping agentic tools. It is part of how the department prepares submissions.",
+    impact: [
+      {
+        label: "EPA tables from pesticide labels",
+        before: "100+ hours by hand",
+        after: "A few minutes",
+      },
+      {
+        label: "What managers do",
+        before: "Write the tables from the PDFs",
+        after: "Spot check, minutes",
+      },
+      { label: "Cost per label", before: "—", after: "$0.50–$0.75" },
+      {
+        label: "Submission",
+        before: "Waits on transcription",
+        after: "Faster time to market",
+      },
+    ],
     metrics: [
-      { label: "Manual work cut", value: "~60–70%" },
-      { label: "Field-level accuracy", value: "88%" },
-      { label: "Schema", value: "28 columns" },
-      { label: "Human review", value: "~30 min" },
+      { label: "Spent by hand", value: "100+ hrs" },
+      { label: "To draft a table", value: "A few min" },
+      { label: "Spot check", value: "Minutes" },
+      { label: "Per label", value: "$0.50–$0.75" },
     ],
     stack: [
       "LLMs (Claude)",
@@ -99,8 +203,8 @@ export const projects: Project[] = [
     slug: "ars-automation",
     title: "ARS (Assessment of Regulatory Success) Automation",
     tagline:
-      "Bayer — reads a safety data sheet and drafts the toxicology sections of country ARS workbooks.",
-    category: "AI",
+      "A production AI agent at Bayer. It reads a safety data sheet and drafts the toxicology sections of country ARS workbooks.",
+    category: "AI agent",
     status: "In production at Bayer · expert review before scores are used",
     problem:
       "Country ARS (Assessment of Regulatory Success) portfolios live in multi-sheet Excel workbooks. Experts read an MSDS, map the hazard lines, then apply that country's scoring rules. It is slow, it is the same job for every ingredient, and it holds up decisions on which active ingredients are worth registering.",
@@ -110,6 +214,11 @@ export const projects: Project[] = [
       "Pull the classifications out of the MSDS, apply the schema sheet that already lives in the country file, and write back into the existing template without breaking the live score formulas. Same idea as the use-summary table: a draft, then a person.",
     deployment:
       "Interactive pilot plus a local Python path, calling Bayer's AI gateway for model work. Secrets stay on the server. Same Pre-Flight guardrails as the use-summary tool: kill switch, rate limit, daily cost cap, metadata audit trail, injection-phrase flags, Agent Card and drift check. An expert still reviews before scores are used.",
+    impact: [
+      { label: "Tox / ecotox", before: "Typed from the safety data sheet", after: "Drafted for review" },
+      { label: "Share of the job", before: "The slow part of every ingredient", after: "About 70% pre-filled" },
+      { label: "Who decides", before: "Expert starts from a blank sheet", after: "Expert checks before scores are used" },
+    ],
     metrics: [
       { label: "Work covered (tox/ecotox)", value: "~70%" },
       { label: "Portfolio target", value: "~63 ingredients" },
@@ -184,6 +293,11 @@ export const projects: Project[] = [
       "I did not create an official corporate standard from scratch. I built a generic, portable version from shipping agentic tools in regulated workflows — turning Agentic AI / AI Governance practice and GenAI learning into a personal checklist with placeholders for whichever organisation you are in (risk gate, identity, catalog, help channel).",
     deployment:
       "Interactive checklist on this site, password-protected. Also available as a private Claude Code skill (/ai-preflight) against real repos. A practitioner synthesis, not an official policy document. Reference apps: Use Summary Table and ARS Automation.",
+    impact: [
+      { label: "Governance", before: "Reinvented on each agent", after: "One checklist, about 30 items" },
+      { label: "Applied to", before: "—", after: "Use summary and ARS" },
+      { label: "What it forces", before: "A slide", after: "A kill switch, an owner, an audit trail" },
+    ],
     metrics: [
       { label: "Sections", value: "6" },
       { label: "Checklist items", value: "~30" },
@@ -257,6 +371,11 @@ export const projects: Project[] = [
       "I own the roadmap and the backlog. Business, user and regulatory needs become acceptance criteria. I also manage the external data and software partners, and keep Regulatory, IT and Marketing on the same plan.",
     deployment:
       "The live platform. Steering committee, vendor management, training, and the arguments about who owns the data.",
+    impact: [
+      { label: "How labels were made", before: "Documents, country by country", after: "One backlog, 100+ labels a quarter" },
+      { label: "Budget", before: "—", after: "About €500k a year" },
+      { label: "Vendors", before: "—", after: "Contracts over €250k" },
+    ],
     metrics: [
       { label: "Labels / quarter", value: "100+" },
       { label: "Annual budget", value: "€500k" },
@@ -274,64 +393,50 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    slug: "agriguide-digitisation",
-    title: "AgriGuide Label Digitisation",
-    tagline:
-      "A shared digital-label product for the industry, already online, aimed at the EU 2028 deadline.",
-    category: "Programme",
-    status: "Live · agriguide.eu · EU 2028",
-    problem:
-      "Product labels are dense paper documents, hard to apply in the field. The EU wants them machine-readable in every market. That only works if competitors and countries use one product, instead of 27 separate builds.",
-    value:
-      "AgriGuide is online. A farmer can scan a label and get the conditions of use that apply in the field. Inside Bayer, writing labels from structured data cut authoring effort by about 40–50%, and overall workflow effort by about 50%. More than 1,500 labels are published, across most of the EU, with all 27 countries in scope.",
-    solution:
-      "I worked on this as a CropLife Europe programme, with Bayer, BASF, Syngenta, Corteva and others on the same delivery. My part was the tech stream, the reference data, Bayer's rollout across 27 countries, and getting IT, Marketing and Product Supply onto one plan.",
-    deployment:
-      "Live at agriguide.eu. Pilots started in Germany, Italy and Romania. Bayer is working toward a digitised EU portfolio by 2028.",
-    metrics: [
-      { label: "Labels published", value: "1,500+" },
-      { label: "EU ambition", value: "27 countries" },
-      { label: "Authoring effort", value: "~40–50% ↓" },
-      { label: "EU deadline", value: "2028" },
-    ],
-    stack: [
-      "Tech work stream",
-      "Reference data work stream",
-      "Cross-company alignment (CropLife Europe)",
-      "Change & country coordination",
-      "IT · Marketing · Product Supply",
-      "Digital labels / SaaS",
-    ],
-    links: [
-      { label: "agriguide.eu", href: "https://www.agriguide.eu/" },
-    ],
-    featured: true,
-  },
-  {
     slug: "pharma-rd-digital-programme",
     title: "Pharma R&D Digital Programme",
     tagline:
-      "A €1 million digital programme for research groups, from what they asked for to a first release.",
+      "I led PIx Portfolio Tracking (PIx PT), covering every Pharma indication from Phase 0 to Phase 2. I was also one of the business analysts on the PIx platform, and did data analysis for a PIx module.",
     category: "Programme",
     status: "Delivered · Bayer Pharma R&D IT",
     problem:
-      "Biology, chemistry and biochemistry groups needed software that scientists would actually open, inside the usual IT and regulatory controls. The user base was hundreds of researchers.",
+      "Pharma needed the whole indication portfolio tracked in one place, from Phase 0 to Phase 2.",
     value:
-      "Shipped a first release for somewhere between 500 and 1,000 researchers. A steering committee watched a budget of about €1 million.",
+      "I led PIx Portfolio Tracking (PIx PT). It tracked the entire portfolio of all Pharma indications from Phase 0 to Phase 2. PIx was connected to that tracking. I was also one of the business analysts on the PIx platform, and did data analysis for a PIx module. The release they could use reached somewhere between 500 and 1,000 researchers. A steering committee watched a budget of about €1 million.",
     solution:
-      "I turned lab requests into a roadmap, user stories and a scope we could ship. Delivery was Scrum and Kanban, with testing, training and a feedback loop.",
+      "I turned what the labs asked for into a roadmap, user stories and a scope for PIx PT. Delivery was Scrum and Kanban, with testing, training and a feedback loop.",
     deployment:
       "Bayer Pharma R&D IT, with steering oversight, a phased rollout, and training.",
+    impact: [
+      {
+        label: "What shipped",
+        before: "Requests from the labs",
+        after: "PIx Portfolio Tracking, Phase 0 to Phase 2",
+      },
+      {
+        label: "Analyst work",
+        before: "—",
+        after: "Business analyst on the PIx platform, data analysis for a PIx module",
+      },
+      { label: "Who it served", before: "—", after: "500–1,000 researchers" },
+      {
+        label: "Money",
+        before: "—",
+        after: "About €1 million, under a steering committee",
+      },
+    ],
     metrics: [
       { label: "Programme value", value: "€1M" },
       { label: "Researchers served", value: "500–1,000" },
       { label: "Governance", value: "Steering Committee" },
-      { label: "Method", value: "Agile MVP" },
+      { label: "Tracking", value: "Phase 0 to Phase 2" },
     ],
     stack: [
+      "PIx PT",
+      "Portfolio tracking",
       "Business analysis",
+      "Data analysis",
       "Agile / Scrum / Kanban",
-      "Regulated IT",
       "Stakeholder management",
     ],
     links: [],

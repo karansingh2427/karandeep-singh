@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Project } from "@/content/projects";
+import { ImpactTable } from "./ImpactTable";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
@@ -27,42 +28,9 @@ export function ProjectCard({ project }: { project: Project }) {
       <p className="mt-4 max-w-3xl text-base leading-relaxed text-ink-soft">
         {project.tagline}
       </p>
-      <dl className="mt-8 grid gap-6 sm:grid-cols-3">
-        <div>
-          <dt className="text-xs font-medium tracking-wide text-ink/50 uppercase">
-            Problem
-          </dt>
-          <dd className="mt-2 text-sm leading-relaxed text-ink-soft">
-            {project.problem}
-          </dd>
-        </div>
-        <div>
-          <dt className="text-xs font-medium tracking-wide text-ink/50 uppercase">
-            Value
-          </dt>
-          <dd className="mt-2 text-sm leading-relaxed text-ink-soft">
-            {project.value}
-          </dd>
-        </div>
-        <div>
-          <dt className="text-xs font-medium tracking-wide text-ink/50 uppercase">
-            Deployment
-          </dt>
-          <dd className="mt-2 text-sm leading-relaxed text-ink-soft">
-            {project.deployment}
-          </dd>
-        </div>
-      </dl>
-      <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
-        {project.metrics.map((m) => (
-          <li key={m.label} className="text-sm text-ink-soft">
-            <span className="font-display text-lg text-sage-deep">
-              {m.value}
-            </span>{" "}
-            <span className="text-ink/45">{m.label}</span>
-          </li>
-        ))}
-      </ul>
+      <div className="mt-6">
+        <ImpactTable rows={project.impact} />
+      </div>
     </article>
   );
 }

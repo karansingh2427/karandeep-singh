@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     title:
       "Karandeep Singh — Life sciences, regulatory digital transformation",
     description:
-      "AI systems in life sciences regulatory work, plus the label-data platform and AgriGuide.",
+      "AI systems in life sciences regulatory work, plus the global digital label programme. AgriGuide is the EU project.",
     type: "website",
     locale: "en_GB",
   },
