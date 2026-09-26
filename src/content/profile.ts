@@ -169,7 +169,6 @@ export const profile = {
     "AI For Everyone · Data Science in Real Life",
     "AI workflows, learned by shipping them at Bayer",
     "Mindfulness Life Coach",
-    "German B1",
   ],
   publication:
     "Nanoparticle-decorated erythrocytes reveal that particle size controls the extent of adsorption, cell shape, and cell deformability",
