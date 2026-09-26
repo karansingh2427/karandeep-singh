@@ -22,7 +22,7 @@ Built and deployed a production agentic AI application that extracts Use Summary
 
 Problem: analysts spent 45–90 minutes per label (far longer across a portfolio) copying crop, use-site and rate data from long PDFs into a 28-column schema.
 
-Solution: browser tool with dual paths (offline regex + LLM extraction → independent QC → human review). Deployed on Cloudflare Pages + Workers with kill switch, rate limits, cost budget, audit trail, content-safety flags and drift checks.
+Solution: browser tool with dual paths (offline regex + LLM extraction → independent QC → human review). Deployed on Agentrix and Bayer's AI gateway with kill switch, rate limits, cost budget, audit trail, content-safety flags and drift checks.
 
 Impact: ~60–70% less manual work; 88% field-level accuracy; hours/months of transcription → minutes of extraction + QC. Teams that finish a run refer the next team — new use cases keep arriving by word of mouth.
 
@@ -32,22 +32,22 @@ Skills: Agentic AI · Production delivery · LLM extraction · Human-in-the-loop
 
 ---
 
-## 2. APRS Digitalisation
+## 2. Automated Portfolio Review
 
-**Project name:** APRS Digitalisation
+**Project name:** Automated Portfolio Review
 
 **Description:**
-Production agent that reads MSDS (safety data sheet) PDFs and drafts toxicology and ecotoxicology in country-specific APRS Excel workbooks. Experts review before the scores are used. That portion is about 70% of the work per active ingredient. Same human-review pattern as the use-summary extractor. Do not reuse the 88% or 60–70% figures here; those belong to the label extractor.
+Bayer Crop Science agent that reads MSDS (safety data sheet) PDFs and drafts toxicology and ecotoxicology in country registration Excel workbooks. Experts review before the scores are used. That portion is about 70% of the work per active ingredient. Same human-review pattern as the use-summary extractor. Do not reuse the 88% or 60–70% figures here; those belong to the label extractor.
 
-Problem: filling APRS portfolios is manual classification + country schema lookup; even partial automation of tox/ecotox is expected to cover ~70% of the work per active ingredient.
+Problem: filling country registration portfolios is manual classification + country schema lookup; even partial automation of tox/ecotox is expected to cover ~70% of the work per active ingredient.
 
-Solution: staged pipeline (extract → apply country schema living in the workbook → write back in-place, preserving live Score/Overall APRS formulas). Same extract → human-review pattern as Use Summary Table, adapted for multi-sheet .xlsx/.xlsm templates and a ~63-ingredient portfolio.
+Solution: staged pipeline (extract → apply country schema living in the workbook → write back in-place, preserving live score formulas). Same extract → human-review pattern as Use Summary Table, adapted for multi-sheet .xlsx/.xlsm templates and a ~63-ingredient portfolio.
 
 Status: deployed with the same Pre-Flight guardrails as the use-summary tool (kill switch, rate/budget, audit trail, injection flags). Experts review the draft before scores are used.
 
 Skills: Document AI · Excel automation · Regulatory workflows · Human-in-the-loop · AI governance
 
-**Media / links:** https://github.com/karansingh2427/APRS_digitalisation · Portfolio: https://karandeepsingh.vercel.app/projects/aprs-digitalisation
+**Media / links:** https://github.com/karansingh2427/APRS_digitalisation · Portfolio: https://karandeepsingh.vercel.app/projects/automated-portfolio-review
 
 ---
 
@@ -58,11 +58,11 @@ Skills: Document AI · Excel automation · Regulatory workflows · Human-in-the-
 **Description:**
 A portable governance checklist for shipping agentic AI. I did not invent an official corporate standard from scratch — I built a generic version from building and deploying agents in regulated life sciences, so I can reuse the same board (kill switch, HITL, audit, cost, injection, ownership, sign-off) on the next agent.
 
-Form: private interactive checklist (~6 sections, ~30 items) plus a Claude Code skill — shared on request, not published open on the portfolio. Already applied to Use Summary Table and APRS.
+Form: password-protected interactive checklist (~6 sections, ~30 items) plus a Claude Code skill. Already applied to Use Summary Table and Automated Portfolio Review.
 
 Skills: AI governance · Agentic AI · HITL · Enablement
 
-**Media / links:** https://karandeepsingh.vercel.app/projects/ai-preflight · Request access via contact: https://karandeepsingh.vercel.app/#contact
+**Media / links:** https://karandeepsingh.vercel.app/projects/ai-preflight · Checklist: https://karandeepsingh.vercel.app/ai-preflight/checklist.html
 
 ---
 

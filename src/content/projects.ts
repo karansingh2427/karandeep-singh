@@ -25,17 +25,17 @@ export const projects: Project[] = [
     slug: "use-summary-table",
     title: "Use Summary Table Extractor",
     tagline:
-      "Drafts the EPA use-summary table from a pesticide label. A reviewer still signs it off before it goes anywhere.",
+      "Bayer Crop Science — drafts the EPA use-summary table from a pesticide label. A reviewer still signs it off before it goes anywhere.",
     category: "AI",
-    status: "In production · used on regulatory submissions",
+    status: "In production at Bayer · used on regulatory submissions",
     problem:
       "Use-summary tables for EPA submission were filled by reading long labels by hand. Crop, rate and use-site data is scattered through the narrative, the rate tables and the appendices. One label took 45–90 minutes. Across a portfolio, that is weeks of transcription.",
     value:
-      "This is in production for regulatory submissions. Manual work on the step is down by about 60–70%. The output is a 28-column table, ready for an EPA filing or a regulatory database after review. That review still takes about half an hour, which is the point.",
+      "Built for Bayer Crop Science regulatory work. Manual work on the step is down by about 60–70%. The output is a 28-column table, ready for an EPA filing or a regulatory database after review. That review still takes about half an hour, which is the point.",
     solution:
-      "A browser tool with two paths. One uses rules and runs offline, for bulk runs. The other sends the label text through the company AI gateway, then a second pass checks the result. Every row keeps a confidence score, the page number and the source sentence, and you can edit the cell before exporting Excel.",
+      "A browser tool with two paths. One uses rules and runs offline, for bulk runs. The other sends the label text through Bayer's AI gateway, then a second pass checks the result. Every row keeps a confidence score, the page number and the source sentence, and you can edit the cell before exporting Excel.",
     deployment:
-      "Live on Cloudflare Pages and Workers. Secrets stay on the server. There is a job queue, a kill switch, a rate limit, a daily cost cap, an audit trail, content-safety flags and drift checks — the Pre-Flight guardrails I apply when shipping agentic tools. It is part of how the department prepares submissions.",
+      "Deployed on Agentrix (container runtime) and through Bayer's AI gateway for model calls. Secrets stay on the server. There is a job queue, a kill switch, a rate limit, a daily cost cap, an audit trail, content-safety flags and drift checks — the Pre-Flight guardrails I apply when shipping agentic tools. It is part of how the department prepares submissions.",
     metrics: [
       { label: "Manual work cut", value: "~60–70%" },
       { label: "Field-level accuracy", value: "88%" },
@@ -44,11 +44,11 @@ export const projects: Project[] = [
     ],
     stack: [
       "LLMs (Claude)",
-      "Cloudflare Pages / Workers / Queues / KV",
+      "Agentrix",
+      "Bayer AI Gateway",
       "PDF.js",
       "SheetJS",
       "Human-in-the-loop UI",
-      "GitHub Copilot agents",
     ],
     links: [
       {
@@ -61,12 +61,12 @@ export const projects: Project[] = [
       {
         question: "What it is",
         answer:
-          "A production agentic system that extracts every crop, use site and application method from pesticide label PDFs into a 28-column Use Summary Table required for EPA submission — with confidence scoring, source citations and inline human review before export. Colleagues use it in their regulatory workflow today.",
+          "A Bayer Crop Science production agent that extracts every crop, use site and application method from pesticide label PDFs into a 28-column Use Summary Table required for EPA submission — with confidence scoring, source citations and inline human review before export. Colleagues use it in their regulatory workflow today.",
       },
       {
         question: "How it works",
         answer:
-          "PDF text is extracted (PDF.js). In AI mode, a Cloudflare Function forwards the label text to an enterprise LLM gateway with extraction and derivation rules; an independent QC pass flags Critical/High issues and can escalate remediation. In regex mode, 60+ field patterns and derivation rules run fully offline in the browser. Reviewers edit cells, filter low-confidence rows, then export Excel/CSV with audit columns.",
+          "PDF text is extracted (PDF.js). In AI mode, the app relays label text through Bayer's AI gateway with extraction and derivation rules; an independent QC pass flags Critical/High issues and can escalate remediation. In regex mode, 60+ field patterns and derivation rules run fully offline in the browser. Reviewers edit cells, filter low-confidence rows, then export Excel/CSV with audit columns.",
       },
       {
         question: "Why it works",
@@ -76,7 +76,7 @@ export const projects: Project[] = [
       {
         question: "Why I chose it",
         answer:
-          "The workflow already owned the pain (US team, regulated labels, clear schema). An agentic extraction + HITL pattern maps cleanly to how analysts already work, and Cloudflare gave a deployable surface with server-side secrets, queues and a kill switch — without waiting for a full enterprise platform build.",
+          "The workflow already owned the pain (US team, regulated labels, clear schema). An agentic extraction + HITL pattern maps cleanly to how analysts already work, and Agentrix plus the AI gateway gave a deployable surface with server-side secrets and a kill switch — without waiting for a full platform rebuild.",
       },
       {
         question: "What its limitations are",
@@ -86,30 +86,30 @@ export const projects: Project[] = [
       {
         question: "What alternatives exist",
         answer:
-          "Pure offline regex (fast, deterministic, lower accuracy); GitHub Copilot agents reading knowledge files without the Bayer gateway; full fine-tuned ML extractors; or continuing fully manual analyst work. Hybrid (regex bulk + agent re-run on low-confidence rows) is often the practical middle path when credits are constrained.",
+          "Pure offline regex (fast, deterministic, lower accuracy); GitHub Copilot agents reading knowledge files without the Bayer AI gateway; full fine-tuned ML extractors; or continuing fully manual analyst work. Hybrid (regex bulk + agent re-run on low-confidence rows) is often the practical middle path when credits are constrained.",
       },
       {
         question: "What happens when things don't work as expected",
         answer:
-          "Kill switch disables AI paths in seconds via KV (in-flight requests finish; new ones get a clear 503). Rate limits and a daily cost budget stop runaway spend. Content-safety / prompt-injection flags are recorded without blocking (false positives on real labels). Drift checks compare recent QC severity against a prior window. Users fall back to regex mode or Copilot agents. Reviewers always see confidence + source text so bad cells are correctable before export — the system fails toward human judgement, not silent wrong tables.",
+          "Kill switch disables AI paths in seconds (in-flight requests finish; new ones get a clear stop). Rate limits and a daily cost budget stop runaway spend. Content-safety / prompt-injection flags are recorded without blocking (false positives on real labels). Drift checks compare recent QC severity against a prior window. Users fall back to regex mode or Copilot agents. Reviewers always see confidence + source text so bad cells are correctable before export — the system fails toward human judgement, not silent wrong tables.",
       },
     ],
   },
   {
-    slug: "aprs-digitalisation",
-    title: "APRS Digitalisation",
+    slug: "automated-portfolio-review",
+    title: "Automated Portfolio Review",
     tagline:
-      "Reads a safety data sheet and fills the toxicology sections of country registration workbooks.",
+      "Bayer Crop Science — reads a safety data sheet and drafts the toxicology sections of country registration workbooks.",
     category: "AI",
-    status: "In production · expert review before the scores are used",
+    status: "In production at Bayer · expert review before scores are used",
     problem:
-      "Country APRS portfolios (Assessment of Regulatory Success) live in multi-sheet Excel workbooks. Experts read an MSDS, map the hazard lines, then apply that country's scoring rules. It is slow, it is the same job for every ingredient, and it holds up decisions on which active ingredients are worth registering.",
+      "Country registration portfolios live in multi-sheet Excel workbooks. Experts read an MSDS, map the hazard lines, then apply that country's scoring rules. It is slow, it is the same job for every ingredient, and it holds up decisions on which active ingredients are worth registering.",
     value:
-      "Toxicology and ecotoxicology look like about 70% of the work per active ingredient. If those cells are pre-filled, the expert reviews instead of typing, and regulatory managers get a clearer view for resourcing. Scoring stays in the workbook's own formulas.",
+      "Built for Bayer Crop Science. Toxicology and ecotoxicology look like about 70% of the work per active ingredient. If those cells are pre-filled, the expert reviews instead of typing, and regulatory managers get a clearer view for resourcing. Scoring stays in the workbook's own formulas.",
     solution:
-      "Pull the classifications out of the MSDS, apply the schema sheet that already lives in the country file, and write back into the existing template without breaking the Score and Overall APRS formulas. Same idea as the use-summary table: a draft, then a person.",
+      "Pull the classifications out of the MSDS, apply the schema sheet that already lives in the country file, and write back into the existing template without breaking the live score formulas. Same idea as the use-summary table: a draft, then a person.",
     deployment:
-      "Cloudflare Pages pilot for the interactive flow, plus a local Python path. Secrets stay on the server. Same Pre-Flight guardrails as the use-summary tool are live here too: kill switch, rate limit, daily cost cap, metadata audit trail, injection-phrase flags, Agent Card, drift check and CSP. An expert still reviews before scores are used. Full per-user identity (Entra) is the next hardening step.",
+      "Interactive pilot plus a local Python path, calling Bayer's AI gateway for model work. Secrets stay on the server. Same Pre-Flight guardrails as the use-summary tool: kill switch, rate limit, daily cost cap, metadata audit trail, injection-phrase flags, Agent Card and drift check. An expert still reviews before scores are used.",
     metrics: [
       { label: "Work covered (tox/ecotox)", value: "~70%" },
       { label: "Portfolio target", value: "~63 ingredients" },
@@ -121,7 +121,7 @@ export const projects: Project[] = [
       "PDF / MSDS extraction",
       "Excel write-back (openpyxl)",
       "Country schema sheets",
-      "Cloudflare Pages + KV",
+      "Bayer AI Gateway",
       "AI Pre-Flight guardrails",
     ],
     links: [
@@ -135,7 +135,7 @@ export const projects: Project[] = [
       {
         question: "What it is",
         answer:
-          "A system that reads an MSDS PDF and pre-fills the toxicology and ecotoxicology portions of Bayer country-specific APRS portfolio workbooks, leaving country experts to review and correct rather than start from a blank sheet.",
+          "A Bayer Crop Science system that reads an MSDS PDF and pre-fills the toxicology and ecotoxicology portions of country registration portfolio workbooks, leaving country experts to review and correct rather than start from a blank sheet.",
       },
       {
         question: "How it works",
@@ -150,7 +150,7 @@ export const projects: Project[] = [
       {
         question: "Why I chose it",
         answer:
-          "Same extraction → review pattern that worked for Use Summary Tables, applied where another regulated team had clear ROI. Keeping schemas in the workbook (not hard-coded) respects country variation without shipping 27 bespoke parsers.",
+          "Same extraction → review pattern that worked for Use Summary Tables at Bayer, applied where another regulated team had clear ROI. Keeping schemas in the workbook (not hard-coded) respects country variation without shipping dozens of bespoke parsers.",
       },
       {
         question: "What its limitations are",
@@ -175,20 +175,20 @@ export const projects: Project[] = [
     tagline:
       "A portable checklist for shipping agentic AI — distilled from building and deploying agents in regulated life sciences.",
     category: "AI",
-    status: "Personal working standard · used on Use Summary Table & APRS",
+    status: "Personal working standard · used on Use Summary Table & Automated Portfolio Review",
     problem:
       "When you ship an agent, the same questions keep coming back: can you stop it, who reviews the output, what did it cost, who owns it, and did you check for prompt injection? Without a shared checklist, every project reinvented those answers — or skipped them.",
     value:
-      "A reusable Pre-Flight board I can run before a pilot or a broader rollout. It turns governance into concrete work (a kill switch in the repo, an audit trail, a named owner) instead of a slide. I have already applied it to the use-summary extractor and the APRS tool.",
+      "A reusable Pre-Flight board I can run before a pilot or a broader rollout. It turns governance into concrete work (a kill switch in the repo, an audit trail, a named owner) instead of a slide. I have already applied it to the use-summary extractor and Automated Portfolio Review.",
     solution:
       "I did not create an official corporate standard from scratch. I built a generic, portable version from shipping agentic tools in regulated workflows — turning Agentic AI / AI Governance practice and GenAI learning into a personal checklist with placeholders for whichever organisation you are in (risk gate, identity, catalog, help channel).",
     deployment:
-      "The interactive checklist itself is not published on this site — ask via the contact form if you want access. I also keep it as a private Claude Code skill (/ai-preflight) against real repos. A practitioner synthesis, not an official policy document. Reference apps: Use Summary Table and APRS.",
+      "Interactive checklist on this site, password-protected. Also available as a private Claude Code skill (/ai-preflight) against real repos. A practitioner synthesis, not an official policy document. Reference apps: Use Summary Table and Automated Portfolio Review.",
     metrics: [
       { label: "Sections", value: "6" },
       { label: "Checklist items", value: "~30" },
       { label: "Apps applied", value: "2+" },
-      { label: "Access", value: "On request" },
+      { label: "Access", value: "Password" },
     ],
     stack: [
       "AI governance practice",
@@ -199,8 +199,8 @@ export const projects: Project[] = [
     ],
     links: [
       {
-        label: "Request the checklist",
-        href: "/#contact",
+        label: "Open checklist",
+        href: "/ai-preflight/checklist.html",
       },
     ],
     featured: true,
@@ -213,12 +213,12 @@ export const projects: Project[] = [
       {
         question: "How it works",
         answer:
-          "For each item, look at the real codebase (done / partial / missing / accepted gap), then implement — no empty ticks. Org-specific mechanisms (risk assessment, managed identity, catalog) stay in my private working copy; the public portfolio only describes the idea.",
+          "For each item, look at the real codebase (done / partial / missing / accepted gap), then implement — no empty ticks. ORG-tagged items map to whatever risk gate, identity and catalog your current organisation uses.",
       },
       {
         question: "Why it works",
         answer:
-          "It came from shipping, not theory. Use Summary Table and APRS forced concrete patterns. A checklist that only names ideals would not have survived those pilots.",
+          "It came from shipping, not theory. Use Summary Table and Automated Portfolio Review forced concrete patterns. A checklist that only names ideals would not have survived those pilots.",
       },
       {
         question: "Why I built a generic version",
@@ -228,7 +228,7 @@ export const projects: Project[] = [
       {
         question: "What its limitations are",
         answer:
-          "Not an official standard of any organisation. Training sign-off and catalog registration stay project-specific follow-ups. The full interactive checklist is shared only on request.",
+          "Not an official standard of any organisation. Training sign-off and catalog registration stay project-specific follow-ups. The interactive board on this site is password-protected.",
       },
       {
         question: "What alternatives exist",
