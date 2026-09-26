@@ -37,7 +37,7 @@ Skills: Agentic AI · Production delivery · LLM extraction · Human-in-the-loop
 **Project name:** ARS (Assessment of Regulatory Success) Automation
 
 **Description:**
-Bayer Crop Science agent that reads MSDS (safety data sheet) PDFs and drafts toxicology and ecotoxicology in country ARS Excel workbooks. Experts review before the scores are used. That portion is about 70% of the work per active ingredient. Same human-review pattern as the use-summary extractor. Do not reuse the 88% or 60–70% figures here; those belong to the label extractor.
+Bayer agent that reads MSDS (safety data sheet) PDFs and drafts toxicology and ecotoxicology in country ARS Excel workbooks. Experts review before the scores are used. That portion is about 70% of the work per active ingredient. Same human-review pattern as the use-summary extractor. Do not reuse the 88% or 60–70% figures here; those belong to the label extractor.
 
 Problem: filling ARS portfolios is manual classification + country schema lookup; even partial automation of tox/ecotox is expected to cover ~70% of the work per active ingredient.
 

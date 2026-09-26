@@ -25,13 +25,13 @@ export const projects: Project[] = [
     slug: "use-summary-table",
     title: "Use Summary Table Extractor",
     tagline:
-      "Bayer Crop Science — drafts the EPA use-summary table from a pesticide label. A reviewer still signs it off before it goes anywhere.",
+      "Bayer — drafts the EPA use-summary table from a pesticide label. A reviewer still signs it off before it goes anywhere.",
     category: "AI",
     status: "In production at Bayer · used on regulatory submissions",
     problem:
       "Use-summary tables for EPA submission were filled by reading long labels by hand. Crop, rate and use-site data is scattered through the narrative, the rate tables and the appendices. One label took 45–90 minutes. Across a portfolio, that is weeks of transcription.",
     value:
-      "Built for Bayer Crop Science regulatory work. Manual work on the step is down by about 60–70%. The output is a 28-column table, ready for an EPA filing or a regulatory database after review. That review still takes about half an hour, which is the point.",
+      "Manual work on the step is down by about 60–70%. The output is a 28-column table, ready for an EPA filing or a regulatory database after review. That review still takes about half an hour, which is the point.",
     solution:
       "A browser tool with two paths. One uses rules and runs offline, for bulk runs. The other sends the label text through Bayer's AI gateway, then a second pass checks the result. Every row keeps a confidence score, the page number and the source sentence, and you can edit the cell before exporting Excel.",
     deployment:
@@ -61,7 +61,7 @@ export const projects: Project[] = [
       {
         question: "What it is",
         answer:
-          "A Bayer Crop Science production agent that extracts every crop, use site and application method from pesticide label PDFs into a 28-column Use Summary Table required for EPA submission — with confidence scoring, source citations and inline human review before export. Colleagues use it in their regulatory workflow today.",
+          "A Bayer production agent that extracts every crop, use site and application method from pesticide label PDFs into a 28-column Use Summary Table required for EPA submission — with confidence scoring, source citations and inline human review before export. Colleagues use it in their regulatory workflow today.",
       },
       {
         question: "How it works",
@@ -99,13 +99,13 @@ export const projects: Project[] = [
     slug: "ars-automation",
     title: "ARS (Assessment of Regulatory Success) Automation",
     tagline:
-      "Bayer Crop Science — reads a safety data sheet and drafts the toxicology sections of country ARS workbooks.",
+      "Bayer — reads a safety data sheet and drafts the toxicology sections of country ARS workbooks.",
     category: "AI",
     status: "In production at Bayer · expert review before scores are used",
     problem:
       "Country ARS (Assessment of Regulatory Success) portfolios live in multi-sheet Excel workbooks. Experts read an MSDS, map the hazard lines, then apply that country's scoring rules. It is slow, it is the same job for every ingredient, and it holds up decisions on which active ingredients are worth registering.",
     value:
-      "Built for Bayer Crop Science. Toxicology and ecotoxicology look like about 70% of the work per active ingredient. If those cells are pre-filled, the expert reviews instead of typing, and regulatory managers get a clearer view for resourcing. Scoring stays in the workbook's own formulas.",
+      "Toxicology and ecotoxicology look like about 70% of the work per active ingredient. If those cells are pre-filled, the expert reviews instead of typing, and regulatory managers get a clearer view for resourcing. Scoring stays in the workbook's own formulas.",
     solution:
       "Pull the classifications out of the MSDS, apply the schema sheet that already lives in the country file, and write back into the existing template without breaking the live score formulas. Same idea as the use-summary table: a draft, then a person.",
     deployment:
@@ -135,7 +135,7 @@ export const projects: Project[] = [
       {
         question: "What it is",
         answer:
-          "A Bayer Crop Science system that reads an MSDS PDF and pre-fills the toxicology and ecotoxicology portions of country ARS (Assessment of Regulatory Success) portfolio workbooks, leaving country experts to review and correct rather than start from a blank sheet.",
+          "A Bayer system that reads an MSDS PDF and pre-fills the toxicology and ecotoxicology portions of country ARS (Assessment of Regulatory Success) portfolio workbooks, leaving country experts to review and correct rather than start from a blank sheet.",
       },
       {
         question: "How it works",
