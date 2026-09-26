@@ -32,14 +32,14 @@ Skills: Agentic AI · Production delivery · LLM extraction · Human-in-the-loop
 
 ---
 
-## 2. Automated Portfolio Review
+## 2. ARS (Assessment of Regulatory Success) Automation
 
-**Project name:** Automated Portfolio Review
+**Project name:** ARS (Assessment of Regulatory Success) Automation
 
 **Description:**
-Bayer Crop Science agent that reads MSDS (safety data sheet) PDFs and drafts toxicology and ecotoxicology in country registration Excel workbooks. Experts review before the scores are used. That portion is about 70% of the work per active ingredient. Same human-review pattern as the use-summary extractor. Do not reuse the 88% or 60–70% figures here; those belong to the label extractor.
+Bayer Crop Science agent that reads MSDS (safety data sheet) PDFs and drafts toxicology and ecotoxicology in country ARS Excel workbooks. Experts review before the scores are used. That portion is about 70% of the work per active ingredient. Same human-review pattern as the use-summary extractor. Do not reuse the 88% or 60–70% figures here; those belong to the label extractor.
 
-Problem: filling country registration portfolios is manual classification + country schema lookup; even partial automation of tox/ecotox is expected to cover ~70% of the work per active ingredient.
+Problem: filling ARS portfolios is manual classification + country schema lookup; even partial automation of tox/ecotox is expected to cover ~70% of the work per active ingredient.
 
 Solution: staged pipeline (extract → apply country schema living in the workbook → write back in-place, preserving live score formulas). Same extract → human-review pattern as Use Summary Table, adapted for multi-sheet .xlsx/.xlsm templates and a ~63-ingredient portfolio.
 
@@ -47,7 +47,7 @@ Status: deployed with the same Pre-Flight guardrails as the use-summary tool (ki
 
 Skills: Document AI · Excel automation · Regulatory workflows · Human-in-the-loop · AI governance
 
-**Media / links:** https://github.com/karansingh2427/APRS_digitalisation · Portfolio: https://karandeepsingh.vercel.app/projects/automated-portfolio-review
+**Media / links:** https://github.com/karansingh2427/APRS_digitalisation · Portfolio: https://karandeepsingh.vercel.app/projects/ars-automation
 
 ---
 
@@ -58,7 +58,7 @@ Skills: Document AI · Excel automation · Regulatory workflows · Human-in-the-
 **Description:**
 A portable governance checklist for shipping agentic AI. I did not invent an official corporate standard from scratch — I built a generic version from building and deploying agents in regulated life sciences, so I can reuse the same board (kill switch, HITL, audit, cost, injection, ownership, sign-off) on the next agent.
 
-Form: password-protected interactive checklist (~6 sections, ~30 items) plus a Claude Code skill. Already applied to Use Summary Table and Automated Portfolio Review.
+Form: password-protected interactive checklist (~6 sections, ~30 items) plus a Claude Code skill. Already applied to Use Summary Table and ARS Automation.
 
 Skills: AI governance · Agentic AI · HITL · Enablement
 

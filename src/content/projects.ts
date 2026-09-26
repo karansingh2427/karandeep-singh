@@ -96,14 +96,14 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "automated-portfolio-review",
-    title: "Automated Portfolio Review",
+    slug: "ars-automation",
+    title: "ARS (Assessment of Regulatory Success) Automation",
     tagline:
-      "Bayer Crop Science — reads a safety data sheet and drafts the toxicology sections of country registration workbooks.",
+      "Bayer Crop Science — reads a safety data sheet and drafts the toxicology sections of country ARS workbooks.",
     category: "AI",
     status: "In production at Bayer · expert review before scores are used",
     problem:
-      "Country registration portfolios live in multi-sheet Excel workbooks. Experts read an MSDS, map the hazard lines, then apply that country's scoring rules. It is slow, it is the same job for every ingredient, and it holds up decisions on which active ingredients are worth registering.",
+      "Country ARS (Assessment of Regulatory Success) portfolios live in multi-sheet Excel workbooks. Experts read an MSDS, map the hazard lines, then apply that country's scoring rules. It is slow, it is the same job for every ingredient, and it holds up decisions on which active ingredients are worth registering.",
     value:
       "Built for Bayer Crop Science. Toxicology and ecotoxicology look like about 70% of the work per active ingredient. If those cells are pre-filled, the expert reviews instead of typing, and regulatory managers get a clearer view for resourcing. Scoring stays in the workbook's own formulas.",
     solution:
@@ -135,7 +135,7 @@ export const projects: Project[] = [
       {
         question: "What it is",
         answer:
-          "A Bayer Crop Science system that reads an MSDS PDF and pre-fills the toxicology and ecotoxicology portions of country registration portfolio workbooks, leaving country experts to review and correct rather than start from a blank sheet.",
+          "A Bayer Crop Science system that reads an MSDS PDF and pre-fills the toxicology and ecotoxicology portions of country ARS (Assessment of Regulatory Success) portfolio workbooks, leaving country experts to review and correct rather than start from a blank sheet.",
       },
       {
         question: "How it works",
@@ -175,15 +175,15 @@ export const projects: Project[] = [
     tagline:
       "A portable checklist for shipping agentic AI — distilled from building and deploying agents in regulated life sciences.",
     category: "AI",
-    status: "Personal working standard · used on Use Summary Table & Automated Portfolio Review",
+    status: "Personal working standard · used on Use Summary Table & ARS Automation",
     problem:
       "When you ship an agent, the same questions keep coming back: can you stop it, who reviews the output, what did it cost, who owns it, and did you check for prompt injection? Without a shared checklist, every project reinvented those answers — or skipped them.",
     value:
-      "A reusable Pre-Flight board I can run before a pilot or a broader rollout. It turns governance into concrete work (a kill switch in the repo, an audit trail, a named owner) instead of a slide. I have already applied it to the use-summary extractor and Automated Portfolio Review.",
+      "A reusable Pre-Flight board I can run before a pilot or a broader rollout. It turns governance into concrete work (a kill switch in the repo, an audit trail, a named owner) instead of a slide. I have already applied it to the use-summary extractor and ARS Automation.",
     solution:
       "I did not create an official corporate standard from scratch. I built a generic, portable version from shipping agentic tools in regulated workflows — turning Agentic AI / AI Governance practice and GenAI learning into a personal checklist with placeholders for whichever organisation you are in (risk gate, identity, catalog, help channel).",
     deployment:
-      "Interactive checklist on this site, password-protected. Also available as a private Claude Code skill (/ai-preflight) against real repos. A practitioner synthesis, not an official policy document. Reference apps: Use Summary Table and Automated Portfolio Review.",
+      "Interactive checklist on this site, password-protected. Also available as a private Claude Code skill (/ai-preflight) against real repos. A practitioner synthesis, not an official policy document. Reference apps: Use Summary Table and ARS Automation.",
     metrics: [
       { label: "Sections", value: "6" },
       { label: "Checklist items", value: "~30" },
@@ -218,7 +218,7 @@ export const projects: Project[] = [
       {
         question: "Why it works",
         answer:
-          "It came from shipping, not theory. Use Summary Table and Automated Portfolio Review forced concrete patterns. A checklist that only names ideals would not have survived those pilots.",
+          "It came from shipping, not theory. Use Summary Table and ARS Automation forced concrete patterns. A checklist that only names ideals would not have survived those pilots.",
       },
       {
         question: "Why I built a generic version",

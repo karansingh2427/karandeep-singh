@@ -5,7 +5,12 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/projects/aprs-digitalisation",
-        destination: "/projects/automated-portfolio-review",
+        destination: "/projects/ars-automation",
+        permanent: true,
+      },
+      {
+        source: "/projects/automated-portfolio-review",
+        destination: "/projects/ars-automation",
         permanent: true,
       },
     ];
