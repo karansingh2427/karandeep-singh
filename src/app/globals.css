@@ -147,6 +147,10 @@ a {
   background: #ebe6db;
 }
 
+.section-band-sage {
+  background: color-mix(in srgb, var(--sage) 12%, var(--paper));
+}
+
 .btn-primary {
   background: var(--sage-deep);
   color: var(--sand);
