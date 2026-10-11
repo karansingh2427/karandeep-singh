@@ -126,7 +126,7 @@ export const profile = {
       bullets: [
         "Product owner for the label-data platform used in 27 countries. About €500k a year, vendor contracts over €250k, and a backlog aimed at more than 100 labels a quarter.",
         "Two production AI systems in life sciences regulatory workflows, both with a person checking the output. One drafts EPA use-summary tables. The other drafts toxicology and ecotoxicology in country registration workbooks from safety data sheets.",
-        "The use-summary system is in production: 149 pages to 155 rows, 28 columns, 88% field-level accuracy against an expert table, source text kept on every cell, with a kill switch and a spend cap.",
+        "The use-summary agent takes any number of pesticide labels. The schema stays at 28 columns, and the row count follows the labels. On a gold-standard check of five labels, 149 pages became 155 rows, at 88% field-level accuracy against an expert table, with source text on every cell, a kill switch and a spend cap.",
         "I lead the global digital label programme. AgriGuide is the EU project, live at agriguide.eu, with Bayer, BASF, Syngenta and Corteva. I worked the tech and reference-data streams there, and lined up IT, Marketing and Product Supply across Bayer's countries. The programme also runs in APAC, North America, ANZ and LATAM.",
       ],
     },

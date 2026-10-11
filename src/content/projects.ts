@@ -119,7 +119,7 @@ export const projects: Project[] = [
     value:
       "The tables are now drafted in a few minutes. Regulatory managers only spot-check them, which takes minutes, so the submission gets to market faster. A label costs about $0.50–$0.75 to run.",
     solution:
-      "A browser tool with two paths. One uses rules and runs offline, for bulk runs. The other sends the label text through Bayer's AI gateway, then a second pass checks the result. Every row keeps a confidence score, the page number and the source sentence, and you can edit the cell before exporting Excel.",
+      "A browser tool with two paths. One uses rules and runs offline, for bulk runs. The other sends the label text through Bayer's AI gateway, then a second pass checks the result. Every row keeps a confidence score, the page number and the source sentence, and you can edit the cell before exporting Excel. One label or many: the 28-column schema stays, and the number of rows follows the labels. A gold-standard check on five labels, 149 pages and 155 rows, came in at 88% field-level accuracy against an expert table.",
     deployment:
       "Deployed on Agentrix (container runtime) and through Bayer's AI gateway for model calls. Secrets stay on the server. There is a job queue, a kill switch, a rate limit, a daily cost cap, an audit trail, content-safety flags and drift checks — the Pre-Flight guardrails I apply when shipping agentic tools. It is part of how the department prepares submissions.",
     impact: [
