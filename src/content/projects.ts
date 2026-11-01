@@ -279,29 +279,109 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "agriguide-qc",
+    title: "AgriGuide QC Agent",
+    tagline:
+      "An AI agent at Bayer that checks a digital label against its approved document before it goes onto AgriGuide. It never publishes; a person does.",
+    category: "AI agent",
+    status: "Pilot at Bayer · colleagues testing on live label QC",
+    problem:
+      "Before a digital label is published on AgriGuide, a colleague opens the approved Word or PDF and checks the label block by block in Quill's AgriGuide preview. They re-read the whole label every time, even when only a few blocks are wrong, and the safety and legal blocks have to be right.",
+    value:
+      "A first-pass punch-list of the preview blocks that look different from the approved document, so the colleague checks those instead of re-reading everything. The target is about 60–70% less QC time. On a planted-error test, 65 mistakes of 14 types in six published labels, it caught all 65, and 85% were marked Wrong rather than Check.",
+    solution:
+      "Upload the approved PDF and the label export. Rule checks with no AI cover the high-risk blocks: hazard and precautionary codes, signal word, pictograms, registration number and active-ingredient amounts. A model compares the rest through Bayer's AI gateway, with forced structured output, then an independent QC pass reviews the findings. Every finding names the crop card and field the colleague sees, with the quote from the approved document. Quotes that are not in the document get downgraded, and a reviewer cannot silently drop a safety or legal finding.",
+    deployment:
+      "Live on Agentrix, with Entra machine-to-machine auth, and model calls through Bayer's AI gateway. Uploaded files are not stored. Same Pre-Flight guardrails as the other agents: kill switch, prompt allowlist, rate limit, daily cost cap, metadata-only audit trail, injection flags, drift checks and an Agent Card. Colleagues fix in Quill, and a regulatory manager publishes from Quill.",
+    impact: [
+      { label: "What gets re-read", before: "The whole label, every time", after: "The blocks on the punch-list" },
+      { label: "Safety and legal blocks", before: "Checked by eye", after: "Rule-checked, then by eye" },
+      { label: "Planted mistakes", before: "—", after: "65 of 65 caught" },
+      { label: "Who publishes", before: "Regulatory manager", after: "Still the regulatory manager" },
+    ],
+    metrics: [
+      { label: "Planted errors caught", value: "65 / 65" },
+      { label: "Marked Wrong", value: "85%" },
+      { label: "QC time target", value: "~60–70% ↓" },
+      { label: "Autonomy", value: "Advisory (L2)" },
+    ],
+    stack: [
+      "LLMs",
+      "Agentrix",
+      "Bayer AI Gateway",
+      "Python",
+      "CropLife DLC JSON",
+      "Human-in-the-loop UI",
+    ],
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/karansingh2427/agriguide-qc-assistant",
+      },
+    ],
+    featured: true,
+    depth: [
+      {
+        question: "What it is",
+        answer:
+          "An L2 advisory QC agent for Bayer's Quill → AgriGuide label digitisation. It takes the approved (golden) label PDF and the CropLife digital-label JSON export, and returns findings by AgriGuide preview block — what looks different, the golden quote, and where to fix it in Quill — plus a marked preview that colours every field by its finding.",
+      },
+      {
+        question: "How it works",
+        answer:
+          "An orchestrator runs structure checks (schema, locales, required blocks), content checks (golden PDF vs label, through the AI gateway with a forced Finding schema) and presentation checks, then an independent QC agent reviews the report. High-risk blocks get deterministic rule checks with no AI. A number cross-check, a quote check and an optional run-twice mode move anything uncertain to Check. Colleagues answer each finding (confirmed / not an issue / unsure / missed), which feeds a precision report.",
+      },
+      {
+        question: "Why it works",
+        answer:
+          "Colleagues QC what the label looks like, not the JSON, so every finding speaks in preview blocks and crop cards they already know. Rules handle the fields where a wrong value is a safety or legal problem; the model handles free text. Grounding every finding in a quote from the golden document keeps hallucinated findings out of the punch-list.",
+      },
+      {
+        question: "Why I chose it",
+        answer:
+          "QC is the bottleneck between digitising a label and publishing it on AgriGuide, the EU project in the programme I lead. It reuses the extract → check → human pattern and the Pre-Flight governance from the use-summary agent, so the guardrails came with it rather than after it.",
+      },
+      {
+        question: "What its limitations are",
+        answer:
+          "Still a pilot; broad rollout is not decided and Agent Hub registration is open. Model output varies run to run. High-risk rule checks need the golden as text — 5 of 18 pilot goldens give no hazard codes as text, so those are checked by eye. The planted-error test covers 14 mistake types on six labels with one seed, and the time saving is a target until colleagues fill in the time trial.",
+      },
+      {
+        question: "What alternatives exist",
+        answer:
+          "Keep re-reading every label by hand; rely on the vendor's first QC alone; or a generic document-diff tool that does not know AgriGuide's blocks. A rules-only version is possible for structure and high-risk fields, but misses free-text drift in directions for use.",
+      },
+      {
+        question: "What happens when things don't work as expected",
+        answer:
+          "Kill switch stops model calls and disables Run on the page. The gateway endpoint only accepts the QC prompts built into the app, so it is not an open LLM proxy. Rate limit and daily budget cap spend. Injection phrases are flagged, never obeyed. Drift checks compare accuracy, dropped findings and unfound quotes against a prior window. 'Looks clean' only shows when every high-risk field matches — otherwise the colleague checks by eye, and nothing is ever published by the tool.",
+      },
+    ],
+  },
+  {
     slug: "ai-preflight",
     title: "AI Pre-Flight Checklist",
     tagline:
       "A portable checklist for shipping agentic AI — distilled from building and deploying agents in regulated life sciences.",
     category: "AI",
-    status: "Personal working standard · used on Use Summary Table & ARS Automation",
+    status: "Personal working standard · used on Use Summary Table, ARS Automation & AgriGuide QC",
     problem:
       "When you ship an agent, the same questions keep coming back: can you stop it, who reviews the output, what did it cost, who owns it, and did you check for prompt injection? Without a shared checklist, every project reinvented those answers — or skipped them.",
     value:
-      "A reusable Pre-Flight board I can run before a pilot or a broader rollout. It turns governance into concrete work (a kill switch in the repo, an audit trail, a named owner) instead of a slide. I have already applied it to the use-summary extractor and ARS Automation.",
+      "A reusable Pre-Flight board I can run before a pilot or a broader rollout. It turns governance into concrete work (a kill switch in the repo, an audit trail, a named owner) instead of a slide. I have already applied it to the use-summary extractor, ARS Automation and the AgriGuide QC agent.",
     solution:
       "I did not create an official corporate standard from scratch. I built a generic, portable version from shipping agentic tools in regulated workflows — turning Agentic AI / AI Governance practice and GenAI learning into a personal checklist with placeholders for whichever organisation you are in (risk gate, identity, catalog, help channel).",
     deployment:
-      "Interactive checklist on this site, password-protected. Also available as a private Claude Code skill (/ai-preflight) against real repos. A practitioner synthesis, not an official policy document. Reference apps: Use Summary Table and ARS Automation.",
+      "Interactive checklist on this site, password-protected. Also available as a private Claude Code skill (/ai-preflight) against real repos. A practitioner synthesis, not an official policy document. Reference apps: Use Summary Table, ARS Automation and AgriGuide QC.",
     impact: [
       { label: "Governance", before: "Reinvented on each agent", after: "One checklist, about 30 items" },
-      { label: "Applied to", before: "—", after: "Use summary and ARS" },
+      { label: "Applied to", before: "—", after: "Use summary, ARS and AgriGuide QC" },
       { label: "What it forces", before: "A slide", after: "A kill switch, an owner, an audit trail" },
     ],
     metrics: [
       { label: "Sections", value: "6" },
       { label: "Checklist items", value: "~30" },
-      { label: "Apps applied", value: "2+" },
+      { label: "Apps applied", value: "3" },
       { label: "Access", value: "Password" },
     ],
     stack: [

@@ -39,8 +39,8 @@ export function Projects() {
             What I have put into production
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-soft">
-            Two agents in regulatory workflows, and the checklist I run before
-            the next one ships.
+            Two agents in production and one in pilot, all in regulatory
+            workflows, and the checklist I run before the next one ships.
           </p>
           <div className="mt-14">
             {agents.map((project) => (
