@@ -13,7 +13,7 @@ export type Project = {
   slug: string;
   title: string;
   tagline: string;
-  category: "AI agent" | "AI" | "Platform" | "Programme" | "Initiative";
+  category: "AI agent" | "AI" | "Platform" | "Programme" | "Initiative" | "Product";
   status: string;
   problem: string;
   value: string;
@@ -282,9 +282,9 @@ export const projects: Project[] = [
     slug: "agriguide-qc",
     title: "AgriGuide QC Agent",
     tagline:
-      "An AI agent at Bayer that checks a digital label against its approved document before it goes onto AgriGuide. It never publishes; a person does.",
+      "A production AI agent at Bayer. It checks a digital label against its approved document before it goes onto AgriGuide. It never publishes; a person does.",
     category: "AI agent",
-    status: "Pilot at Bayer · colleagues testing on live label QC",
+    status: "In production at Bayer · a person checks and publishes",
     problem:
       "Before a digital label is published on AgriGuide, a colleague opens the approved Word or PDF and checks the label block by block in Quill's AgriGuide preview. They re-read the whole label every time, even when only a few blocks are wrong, and the safety and legal blocks have to be right.",
     value:
@@ -344,7 +344,7 @@ export const projects: Project[] = [
       {
         question: "What its limitations are",
         answer:
-          "Still a pilot; broad rollout is not decided and Agent Hub registration is open. Model output varies run to run. High-risk rule checks need the golden as text — 5 of 18 pilot goldens give no hazard codes as text, so those are checked by eye. The planted-error test covers 14 mistake types on six labels with one seed, and the time saving is a target until colleagues fill in the time trial.",
+          "Agent Hub registration is still open. Model output varies run to run. High-risk rule checks need the golden as text — 5 of 18 goldens in the first batch give no hazard codes as text, so those are checked by eye. The planted-error test covers 14 mistake types on six labels with one seed, and the time saving is a target until the time trial is measured.",
       },
       {
         question: "What alternatives exist",
@@ -520,6 +520,44 @@ export const projects: Project[] = [
       "Stakeholder management",
     ],
     links: [],
+    featured: false,
+  },
+  {
+    slug: "move-with-karan",
+    title: "Move with Karan",
+    tagline:
+      "A mobility, calisthenics and movement coaching app I built on my own time. Answer a few questions and you get a weekly plan that adapts to how each exercise felt.",
+    category: "Product",
+    status: "Live at movewithkaran.com · personal project",
+    problem:
+      "I coach friends on mobility and strength. Programs lived in chat messages and notes, nobody logged pain or weights, and I only found out an exercise hurt or was too easy at the next conversation.",
+    value:
+      "Each person gets a plan built around their goals, pain areas, equipment and the time they have, follows it on their phone, and sends me a weekly check-in. The plan adjusts itself between check-ins, so I spend my time on the program, not on chasing updates.",
+    solution:
+      "A two-minute setup (goals, pain areas, experience, equipment, days and session length) builds a week from a library of about 100 exercises, with rules and no AI. After every exercise people rate it Easy, Good, Hard or Hurt: easy gets more sets or the harder variation, hard or hurt eases off, and a pain area at 6/10 or more eases every exercise that loads it. Sessions have cues, easier and harder options, demo clips, hold timers, weight logging and a guided one-exercise-at-a-time mode. A body map lets people tap where it hurts and get safety checks and exercises for that spot.",
+    deployment:
+      "Installable web app (PWA) that works offline, on its own domain. Optional sign-in with an email code syncs plans across phones and opens a coach dashboard. There, AI can draft a program for a person, and I approve it before they see it — the same draft-then-human pattern as my agents at work.",
+    impact: [
+      { label: "Program", before: "Chat messages and notes", after: "A weekly plan on their phone" },
+      { label: "Pain and effort", before: "Heard about at the next chat", after: "Rated after every exercise" },
+      { label: "Progression", before: "Adjusted by hand, if at all", after: "Adjusts itself between check-ins" },
+      { label: "AI programs", before: "—", after: "Drafted by AI, approved by me" },
+    ],
+    metrics: [
+      { label: "Setup", value: "2 min" },
+      { label: "Exercises", value: "~100" },
+      { label: "Session length", value: "15–60 min" },
+      { label: "Works", value: "Offline" },
+    ],
+    stack: [
+      "React · TypeScript",
+      "PWA (offline)",
+      "Rule-based plan generator",
+      "Supabase (sign-in, sync)",
+      "Claude (coach-approved drafts)",
+      "GitHub Pages",
+    ],
+    links: [{ label: "movewithkaran.com", href: "https://movewithkaran.com/" }],
     featured: false,
   },
 ];
