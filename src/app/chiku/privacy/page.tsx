@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const UPDATED = "6 November 2026";
+const UPDATED = "7 November 2026";
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
@@ -43,22 +43,31 @@ export default function ChikuPrivacyPage() {
             </Section>
 
             <Section title="What Google data Chiku accesses">
+              <p>With the account owner&apos;s consent, Chiku requests two read-only Google permissions:</p>
+              <ul className="list-disc space-y-2 pl-5">
+                <li>
+                  <strong className="text-ink">Gmail</strong> (<code>gmail.readonly</code>): search and read messages and
+                  their metadata (sender, subject, date and labels).
+                </li>
+                <li>
+                  <strong className="text-ink">Google Calendar</strong> (<code>calendar.readonly</code>): read the
+                  calendars and events on the account (title, time, location and number of attendees).
+                </li>
+              </ul>
               <p>
-                With the account owner&apos;s consent, Chiku requests one Google permission: read-only access to Gmail
-                (<code>gmail.readonly</code>). It can search and read messages and their metadata (sender, subject, date
-                and labels). It cannot send, delete, label or change email, and it does not access any other Google
-                service.
+                Chiku cannot send, delete, label or change email, cannot create or change calendar events, and does not
+                access any other Google service.
               </p>
             </Section>
 
             <Section title="How the data is used">
               <p>
-                Email is read only to help the account owner: to summarise unread mail, point out what needs a reply,
-                draft suggested replies for him to send himself, and answer his questions about his own mail. Email is
-                read when he asks, and once a day for his morning brief.
+                Google data is used only to help the account owner: to summarise unread mail, point out what needs a
+                reply, draft suggested replies for him to send himself, show his schedule, and answer his questions about
+                his own mail and calendar. It is read when he asks, and once a day for his morning brief.
               </p>
               <p>
-                Gmail data is never used for advertising, never sold, and never used to train AI models. Chiku&apos;s use
+                Google data is never used for advertising, never sold, and never used to train AI models. Chiku&apos;s use
                 of information received from Google APIs adheres to the{" "}
                 <a
                   href="https://developers.google.com/terms/api-services-user-data-policy"
@@ -76,20 +85,20 @@ export default function ChikuPrivacyPage() {
               <ul className="list-disc space-y-2 pl-5">
                 <li>
                   <strong className="text-ink">Anthropic:</strong> to produce a summary or answer, the relevant email
-                  text is sent to Anthropic&apos;s Claude API, which processes it under Anthropic&apos;s commercial terms.
+                  or calendar text is sent to Anthropic&apos;s Claude API, which processes it under Anthropic&apos;s commercial terms.
                   Anthropic does not train its models on API data.
                 </li>
                 <li>
                   <strong className="text-ink">Telegram:</strong> Chiku&apos;s replies, which may include summaries of
-                  email, are delivered to the account owner in a private Telegram chat.
+                  email and calendar entries, are delivered to the account owner in a private Telegram chat.
                 </li>
                 <li>
                   <strong className="text-ink">The owner&apos;s own storage:</strong> Chiku keeps a log of its
                   conversations with the owner, which may include those summaries. The log is stored on his computer and
-                  backed up to his private GitHub repository. Full emails are not stored.
+                  backed up to his private GitHub repository. Full emails and calendars are not stored.
                 </li>
               </ul>
-              <p>Gmail data is not shared with anyone else.</p>
+              <p>Google data is not shared with anyone else.</p>
             </Section>
 
             <Section title="Security">
