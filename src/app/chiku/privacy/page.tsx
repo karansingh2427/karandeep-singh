@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const UPDATED = "7 November 2026";
+const UPDATED = "10 November 2026";
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
@@ -43,11 +43,16 @@ export default function ChikuPrivacyPage() {
             </Section>
 
             <Section title="What Google data Chiku accesses">
-              <p>With the account owner&apos;s consent, Chiku requests two read-only Google permissions:</p>
+              <p>With the account owner&apos;s consent, Chiku requests three Google permissions:</p>
               <ul className="list-disc space-y-2 pl-5">
                 <li>
-                  <strong className="text-ink">Gmail</strong> (<code>gmail.readonly</code>): search and read messages and
-                  their metadata (sender, subject, date and labels).
+                  <strong className="text-ink">Gmail, read</strong> (<code>gmail.readonly</code>): search and read
+                  messages and their metadata (sender, subject, date and labels).
+                </li>
+                <li>
+                  <strong className="text-ink">Gmail, drafts</strong> (<code>gmail.compose</code>): save draft emails,
+                  with attachments the owner provided, in his own Gmail. Google bundles sending into this permission;
+                  Chiku never uses it to send. The owner reviews each draft and sends it himself.
                 </li>
                 <li>
                   <strong className="text-ink">Google Calendar</strong> (<code>calendar.readonly</code>): read the
@@ -55,15 +60,15 @@ export default function ChikuPrivacyPage() {
                 </li>
               </ul>
               <p>
-                Chiku cannot send, delete, label or change email, cannot create or change calendar events, and does not
-                access any other Google service.
+                Chiku does not send, delete, label or change existing email, cannot create or change calendar events,
+                and does not access any other Google service.
               </p>
             </Section>
 
             <Section title="How the data is used">
               <p>
                 Google data is used only to help the account owner: to summarise unread mail, point out what needs a
-                reply, draft suggested replies for him to send himself, show his schedule, and answer his questions about
+                reply, prepare reply drafts in his Gmail for him to review and send himself, show his schedule, and answer his questions about
                 his own mail and calendar. It is read when he asks, and once a day for his morning brief.
               </p>
               <p>
