@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const UPDATED = "10 November 2026";
+const UPDATED = "12 November 2026";
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
@@ -51,8 +51,9 @@ export default function ChikuPrivacyPage() {
                 </li>
                 <li>
                   <strong className="text-ink">Gmail, drafts</strong> (<code>gmail.compose</code>): save draft emails,
-                  with attachments the owner provided, in his own Gmail. Google bundles sending into this permission;
-                  Chiku never uses it to send. The owner reviews each draft and sends it himself.
+                  with attachments the owner provided, in his own Gmail, and send a draft only after the owner
+                  approves it. Each send needs the owner to open that exact email in his private dashboard and tap
+                  Approve; Chiku cannot send on its own. Otherwise the owner reviews each draft and sends it himself.
                 </li>
                 <li>
                   <strong className="text-ink">Google Calendar</strong> (<code>calendar.readonly</code>): read the
@@ -60,7 +61,7 @@ export default function ChikuPrivacyPage() {
                 </li>
               </ul>
               <p>
-                Chiku does not send, delete, label or change existing email, cannot create or change calendar events,
+                Chiku does not send email without that approval, does not delete, label or change existing email, cannot create or change calendar events,
                 and does not access any other Google service.
               </p>
             </Section>
