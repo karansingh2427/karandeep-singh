@@ -43,7 +43,7 @@ export default function ChikuPrivacyPage() {
             </Section>
 
             <Section title="What Google data Chiku accesses">
-              <p>With the account owner&apos;s consent, Chiku requests three Google permissions:</p>
+              <p>With the account owner&apos;s consent, Chiku requests four Google permissions:</p>
               <ul className="list-disc space-y-2 pl-5">
                 <li>
                   <strong className="text-ink">Gmail, read</strong> (<code>gmail.readonly</code>): search and read
@@ -59,9 +59,15 @@ export default function ChikuPrivacyPage() {
                   <strong className="text-ink">Google Calendar</strong> (<code>calendar.readonly</code>): read the
                   calendars and events on the account (title, time, location and number of attendees).
                 </li>
+                <li>
+                  <strong className="text-ink">Google Calendar, events</strong> (<code>calendar.events</code>): create a
+                  new event, and send Google&apos;s invitation to the guests listed, only after the owner approves that
+                  exact event in his private dashboard or in his private Telegram chat. Chiku cannot create events on
+                  its own.
+                </li>
               </ul>
               <p>
-                Chiku does not send email without that approval, does not delete, label or change existing email, cannot create or change calendar events,
+                Chiku does not send email without that approval, does not delete, label or change existing email, does not create calendar events without that approval, does not change or delete existing events,
                 and does not access any other Google service.
               </p>
             </Section>
