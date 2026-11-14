@@ -13,7 +13,7 @@ export type Project = {
   slug: string;
   title: string;
   tagline: string;
-  category: "AI agent" | "AI" | "Platform" | "Programme" | "Initiative" | "Product";
+  category: "AI agent" | "AI" | "Platform" | "Programme" | "Initiative" | "Product" | "Venture" | "Research";
   status: string;
   problem: string;
   value: string;
@@ -24,6 +24,7 @@ export type Project = {
   stack: string[];
   links: { label: string; href: string }[];
   featured: boolean;
+  ownTime?: boolean;
   depth?: DepthAnswer[];
   mission?: string;
   vision?: string;
@@ -523,12 +524,224 @@ export const projects: Project[] = [
     featured: false,
   },
   {
-    slug: "move-with-karan",
-    title: "Move with Karan",
+    slug: "stealth-startup",
+    title: "Stealth Startup: Regulatory Data Layer",
+    tagline:
+      "A company I am founding. It turns the regulatory facts scattered across a chemical company's documents and systems into one governed record, then generates labels and digital labels from it.",
+    category: "Venture",
+    status: "Stealth · pre-seed · working prototype",
+    ownTime: true,
+    problem:
+      "In crop protection and construction chemicals, the same fact — a use rate, a pre-harvest interval, a hazard statement — has different values in the ERP, the label, the safety data sheet and the registration decision. Nobody can say who owns it or which source is true, and every regulatory change means weeks of hunting by hand. EU law now requires digital labels for plant protection products, and digital product passports are coming for construction products.",
+    value:
+      "One governed source of truth per product and country. When a regulator changes its mind, every affected label, document and system is found in minutes, with drafts to approve, instead of weeks of manual search.",
+    solution:
+      "AI reads, rules write, experts decide. Agents extract every fact with its evidence — the page and the exact quote — and a separate check confirms the quote is really there. Facts are reconciled by owner and authoritative source, and conflicts go to a steward, whose decision and reason are recorded and reused. Labels and digital labels are compiled by fixed rules, so no AI-written text reaches a released label, and nothing is released while a conflict is open.",
+    deployment:
+      "A working engine with connectors (folders, SharePoint, ERP and PIM exports), a shared regulatory model that each industry extends, a versioned decision ledger with an audit log, a label compiler, change impact and an API. It runs on published documents, and exports digital labels validated against the public AgriGuide schema. Pitch deck, explainer video and demo are done; details stay private for now.",
+    impact: [
+      { label: "Same fact, many systems", before: "Different values, no owner", after: "One governed record with evidence" },
+      { label: "A regulatory change", before: "Weeks of manual hunting", after: "Affected labels found in minutes" },
+      { label: "Expert judgement", before: "In a few senior heads", after: "Recorded once, reused" },
+      { label: "Released labels", before: "Hand-assembled", after: "Compiled by rules, no AI text" },
+    ],
+    metrics: [
+      { label: "Stage", value: "Pre-seed" },
+      { label: "Principle", value: "AI reads, rules write" },
+      { label: "Beachhead", value: "EU crop protection" },
+      { label: "Next", value: "Construction" },
+    ],
+    stack: [
+      "Python · FastAPI",
+      "Claude (structured extraction)",
+      "Evidence-linked facts",
+      "Decision ledger · audit log",
+      "Deterministic label compiler",
+      "AgriGuide data model",
+    ],
+    links: [],
+    featured: true,
+  },
+  {
+    slug: "when-frontier-pays",
+    title: "When Frontier Pays",
+    tagline:
+      "My own study of when a frontier model is worth its price for regulatory data work, and when rules or a small model do the job. Tested on 300 FDA drug labels.",
+    category: "Research",
+    status: "Study complete · November 2026",
+    ownTime: true,
+    problem:
+      "Every agent I build raises the same question: which model for which step? The default is the biggest model everywhere, which is expensive, or a small one, which can be wrong in ways that are hard to see. I wanted numbers instead of opinions, on a task that looks like real regulatory work.",
+    value:
+      "A rule I now apply to agents: give the model the official list, use agreement as the escalation signal, and send only the hard cases to the frontier model. A hybrid matched or beat Opus on every task at 45% of the cost; a stricter setting came within about 0.01 on codes at about one ninth of the cost.",
+    solution:
+      "Three tasks per label, with FDA's own fields as the answer key: copy the package codes, map each active ingredient to its UNII code, and name the drug class. I compared plain rules, two small models on my laptop, Claude Haiku and Claude Opus, each from memory and with a lookup tool, and hybrids. Everything was tuned on 100 dev labels and frozen before one run on 300 test labels.",
+    deployment:
+      "Findings write-up with a cost-versus-accuracy chart. Total API spend for the study: $18.52.",
+    impact: [
+      { label: "Small models on codes", before: "Asked not to guess", after: "Still invented 80–99%" },
+      { label: "Haiku with the official list", before: "0.42 F1 from memory", after: "0.95 F1, nothing invented" },
+      { label: "Where rules and Haiku agreed", before: "—", after: "97% of labels fully right" },
+      { label: "Hybrid vs Opus everywhere", before: "$22.61 per 1,000 labels", after: "$10.23, same or better" },
+    ],
+    metrics: [
+      { label: "Test labels", value: "300" },
+      { label: "Approaches", value: "9" },
+      { label: "Hybrid cost vs Opus", value: "45%" },
+      { label: "Study spend", value: "$18.52" },
+    ],
+    stack: [
+      "openFDA",
+      "Claude Haiku · Claude Opus",
+      "Llama 3.1 8B · Mistral Small (local)",
+      "Rules and dictionaries",
+      "Python · TypeScript",
+    ],
+    links: [],
+    featured: true,
+    depth: [
+      {
+        question: "What I found",
+        answer:
+          "Copying is easy and recalling is where models split: every careful approach scored 0.96–0.99 on codes printed in the label, but 0.00–0.97 on codes that had to come from memory or a list. Small models invented codes even when told not to guess. Giving the model the official list did more than a bigger model. Where rules and Haiku agreed, 97% of labels were fully right, which makes agreement a reliable escalation signal. The frontier model's lasting edge is judgement, like choosing the drug class, and that edge is noisy from run to run.",
+      },
+      {
+        question: "How I apply it",
+        answer:
+          "Rules first where the answer is printed, a cheap model with a lookup for normalisation, and the frontier model only where the cheap paths disagree. It is the same split I use in my production agents: deterministic checks on the high-risk fields, a model for the rest, and a person at the end.",
+      },
+      {
+        question: "What its limitations are",
+        answer:
+          "One domain and 300 test labels, so a difference of 0.01–0.02 is a handful of labels. Opus's recall of ingredient codes is probably memorised public FDA data; private vocabularies would favour lookup even more. List prices from November 2026, one effort setting, and local model times from a laptop.",
+      },
+    ],
+  },
+  {
+    slug: "chiku-personal-agent",
+    title: "Chiku, my personal AI agent",
+    tagline:
+      "An AI agent I built for myself. It runs around the clock on a small server, talks to me on Telegram and in its own Hub app, and can act only after I approve.",
+    category: "AI agent",
+    status: "Running daily · personal project",
+    ownTime: true,
+    problem:
+      "I wanted to understand how agents really work, not only use one, and I wanted one that is mine: my memory, my rules, and nothing that acts without me. The model turned out to be the easy part.",
+    value:
+      "A morning brief, meeting prep, inbox triage with drafted replies, deadlines, training and health from my coaching app, a journal and notes, overnight research on questions I queue, and trip planning from flights and hotels to the itinerary.",
+    solution:
+      "Chiku's own tools, skills, Hub and voice pipeline on top of an open-source agent loop. Memory is plain markdown I can read and edit, backed up every night. Scheduled jobs send the brief, a weekly training review and a nightly review. Voice notes are transcribed in English and Hindi. Gmail and Calendar are read-only by default.",
+    deployment:
+      "When I wanted it to send emails, not just draft them, the real work started. Chiku can only ask: each request shows the exact email and I approve it in Telegram or the Hub. What gets sent must match what I saw, so if the draft changes after the request the send is refused. Every request and decision is logged, and requests expire after 72 hours. None of that is prompting; it is code around the model.",
+    impact: [
+      { label: "Morning", before: "Opening five apps", after: "One brief at 7:00" },
+      { label: "Email", before: "Read and write everything myself", after: "Triage and drafts, I approve" },
+      { label: "Acting on my behalf", before: "—", after: "Only after approval, logged" },
+      { label: "Memory", before: "Scattered notes", after: "Markdown I can read and edit" },
+    ],
+    metrics: [
+      { label: "Runs", value: "24/7" },
+      { label: "Channels", value: "Telegram · Hub" },
+      { label: "Approval expiry", value: "72 h" },
+      { label: "Gmail & Calendar", value: "Read-only" },
+    ],
+    stack: [
+      "TypeScript",
+      "Claude (Haiku · Sonnet · Opus)",
+      "OpenClaw agent loop",
+      "Telegram · Hub web app",
+      "Markdown memory",
+      "Speech-to-text",
+    ],
+    links: [{ label: "About Chiku", href: "/chiku" }],
+    featured: true,
+  },
+  {
+    slug: "sales-sequence-agent",
+    title: "Sales Sequence Agent",
+    tagline:
+      "An agent I built for a business development rep at a B2B software company. It turns CRM notes into a personal LinkedIn and email sequence, and nothing goes out until she approves each line.",
+    category: "AI agent",
+    status: "Pilot · Netherlands, then Belgium",
+    ownTime: true,
+    problem:
+      "Leads already arrived in the CRM with company notes from another agent, but outreach was cold calls and generic templates. Personalising every step of a LinkedIn and email sequence by hand did not scale, and handing the whole thing to an agent was not acceptable either.",
+    value:
+      "Each lead gets a sequence written for that person from the CRM notes, the rep approves every line, any reply stops the sequence, and an interested lead reaches her on Slack with the whole conversation so she can book the demo herself.",
+    solution:
+      "Skills pull never-contacted leads from the last 30 days in small daily batches, draft the full multichannel flow (profile visit, invite note, one email, two LinkedIn follow-ups), push approved lines to the sending tool, classify replies, and hand off interested leads on Slack. The rep can teach the agent how she writes, and that feedback never bypasses approval.",
+    deployment:
+      "A web app with a demo workspace plus Claude skills she runs with her own CRM, Gmail and Slack connectors. Governance is written down: approve before send, never auto-book a calendar, English write-backs to the CRM, and evals on the rules.",
+    impact: [
+      { label: "Outreach", before: "Cold calls, templates", after: "A personal sequence per lead" },
+      { label: "Who decides", before: "—", after: "The rep approves every line" },
+      { label: "A reply", before: "Tracked by hand", after: "Stops the sequence, gets classified" },
+      { label: "Demo booking", before: "—", after: "Slack handoff, booked by a person" },
+    ],
+    metrics: [
+      { label: "Channels", value: "LinkedIn + email" },
+      { label: "Emails per lead", value: "1" },
+      { label: "Approval", value: "Every line" },
+      { label: "Auto-booking", value: "Never" },
+    ],
+    stack: [
+      "Next.js · TypeScript",
+      "Claude skills",
+      "HubSpot",
+      "Lemlist · Gmail",
+      "Slack",
+    ],
+    links: [
+      { label: "GitHub", href: "https://github.com/karansingh2427/sales-generator" },
+    ],
+    featured: true,
+  },
+  {
+    slug: "inquiry-agent",
+    title: "Inquiry Agent for a Yoga School",
+    tagline:
+      "An agent that answers student inquiries for a yoga school in Rishikesh, by email and WhatsApp, from the school's own facts. Anything sensitive waits for the owner.",
+    category: "AI agent",
+    status: "Live · built for a yoga school in India",
+    ownTime: true,
+    problem:
+      "The school's owner answered every website form, email and message himself, often the same questions about courses, dates, prices and payment, while also teaching. Slow replies meant students booked somewhere else.",
+    value:
+      "Clear questions get an answer in minutes. Bookings, payments, refunds, health and injuries, and anything not in the knowledge base stay as drafts for the owner. It costs about a dollar a month.",
+    solution:
+      "Every five minutes the agent reads new mail, including form notifications, skips newsletters and threads the owner already answered, and replies from a knowledge base of the school's facts and his rules. Labels in the inbox record what happened, so nothing is answered twice. WhatsApp runs alongside the owner's own app; if a reply cannot be sent there, he gets the suggested reply by email instead of a silent failure.",
+    deployment:
+      "Google Cloud Run on the free tier, woken by Cloud Scheduler, with secrets in Secret Manager and Claude Haiku as the default model. It runs in the owner's own Google account, and he can revoke access at any time.",
+    impact: [
+      { label: "Common questions", before: "Answered by hand, when he had time", after: "Answered in minutes" },
+      { label: "Bookings, payments, health", before: "—", after: "Drafted, the owner decides" },
+      { label: "Answered twice", before: "Easy to miss a thread", after: "Inbox labels prevent it" },
+      { label: "Running cost", before: "—", after: "About $1 a month" },
+    ],
+    metrics: [
+      { label: "Checks inbox", value: "Every 5 min" },
+      { label: "Channels", value: "Email · WhatsApp" },
+      { label: "Cost", value: "~$1 / month" },
+      { label: "Model", value: "Claude Haiku" },
+    ],
+    stack: [
+      "Python",
+      "Claude Haiku",
+      "Gmail API",
+      "WhatsApp Business",
+      "Google Cloud Run",
+    ],
+    links: [],
+    featured: true,
+  },
+  {
+    slug: "karuna-moves",
+    title: "Karuna Moves",
     tagline:
       "A mobility, calisthenics and movement coaching app I built on my own time. Answer a few questions and you get a weekly plan that adapts to how each exercise felt.",
     category: "Product",
-    status: "Live at movewithkaran.com · personal project",
+    status: "Live at karunamoves.com · personal project",
+    ownTime: true,
     problem:
       "I coach friends on mobility and strength. Programs lived in chat messages and notes, nobody logged pain or weights, and I only found out an exercise hurt or was too easy at the next conversation.",
     value:
@@ -557,7 +770,7 @@ export const projects: Project[] = [
       "Claude (coach-approved drafts)",
       "GitHub Pages",
     ],
-    links: [{ label: "movewithkaran.com", href: "https://movewithkaran.com/" }],
+    links: [{ label: "karunamoves.com", href: "https://karunamoves.com/" }],
     featured: false,
   },
 ];

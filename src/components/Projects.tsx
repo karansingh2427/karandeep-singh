@@ -5,9 +5,11 @@ const programmes = projects.filter(
   (project) => project.category === "Programme" || project.category === "Platform",
 );
 const agents = projects.filter(
-  (project) => project.category === "AI agent" || project.category === "AI",
+  (project) =>
+    !project.ownTime &&
+    (project.category === "AI agent" || project.category === "AI"),
 );
-const products = projects.filter((project) => project.category === "Product");
+const ownTime = projects.filter((project) => project.ownTime);
 
 export function Projects() {
   return (
@@ -56,14 +58,15 @@ export function Projects() {
             On my own time
           </p>
           <h2 className="mt-4 max-w-2xl font-display text-3xl tracking-tight text-ink md:text-4xl">
-            What I build outside work
+            What I build outside Bayer
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-soft">
-            A coaching app for the movement side of my life, built and run
-            end to end myself.
+            A startup in stealth, a study on which model to use when, my own
+            agent, agents for people I work with, and a coaching app. Built
+            and run end to end myself.
           </p>
           <div className="mt-14">
-            {products.map((project) => (
+            {ownTime.map((project) => (
               <ProjectCard key={project.slug} project={project} />
             ))}
           </div>

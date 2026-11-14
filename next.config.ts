@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/projects/move-with-karan",
+        destination: "/projects/karuna-moves",
+        permanent: true,
+      },
+      {
         source: "/:path*",
         has: [{ type: "host", value: "karandeepsingh.vercel.app" }],
         destination: "https://karandeepsingh.net/:path*",
